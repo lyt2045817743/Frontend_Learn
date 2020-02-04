@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+    <script>
+        // //let不能变量提升    a is not defined
+        // console.log(a);//从这以上都是暂时性死区
+        // let a=10;
+
+        // //let 不能声明两个同名的变量   Identifier 'a' has already been declared
+        // //1
+        // let a=10;
+        // let a=20;
+        // console.log(a);
+        // //2
+        // var a = 10;
+        // let a = "abc";
+        // console.log(window.a);
+
+        // // (定义过的变量能改变其数据类型)    123
+        // let b=10;
+        // b="123";
+        // console.log(b);
+
+        // // let 块级作用域 1     a is not defined
+        // if(true){
+        //     let a=10;
+        // }
+        // console.log(a);
+
+        // let 块级作用域 2     a is not defined
+        // var oLi=document.getElementsByTagName("li");
+        // for(let i=0;i<oLi.length;i++){
+        //     oLi[i].onclick=function(){
+        //         console.log(i);
+                
+        //     }
+        // }
+
+            // //不用let的方法一
+            // var oLi=document.getElementsByTagName("li");
+            // for(var i=0;i<oLi.length;i++){
+            //     (function(index){
+            //         oLi[i].onclick=function(){
+            //             console.log(index);
+            //         }
+            //     })(i)
+            // }
+
+            //不用let的方法二  略  用oLi[i].index
+        
+        
+        
+
+        
+
+    </script>
+</body>
+</html>
