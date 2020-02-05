@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div {
+            width: 100px;
+            height: 50px;
+            background-color: #7e7e7e;
+            float: left;
+            line-height: 50px;
+            color: white;
+            text-align: center;
+        }
+
+        .active {
+            background-color: #000;
+        }
+    </style>
+</head>
+
+<body>
+    <div data-num="first" class="active">first</div>
+    <div data-num="second">second</div>
+    <div data-num="third">third</div>
+    <script>
+        var oDiv = document.querySelectorAll("div");
+        for (var i = 0; i < oDiv.length; i++) {
+            oDiv[i].onclick = function () {
+                for (var j = 0; j < oDiv.length; j++) {
+                    oDiv[j].className = "";
+                }
+                this.className = "active";
+                location.hash = this.dataset.num;
+            }
+        }
+
+        window.onhashchange = function () {
+            for (var i = 0; i < oDiv.length; i++) {
+                var thisHash = location.hash.substr(1);
+
+                if (thisHash == oDiv[i].dataset.num) {
+                    for (var j = 0; j < oDiv.length; j++) {
+                        oDiv[j].className = "";
+                    }
+                    oDiv[i].className = "active";
+                    location.hash = oDiv[i].dataset.num;
+                }
+            }
+        }
+
+    </script>
+</body>
+
+</html>

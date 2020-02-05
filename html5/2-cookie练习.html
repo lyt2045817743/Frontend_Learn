@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function setCookie(key,value,date){
+            var timer=new Date();
+            timer.setDate(timer.getDate()+1);
+            document.cookie=key+"="+value+";expires="+timer.toUTCString();
+        }
+        function getCookie(key){
+            var thisArr=document.cookie.split(";");
+            for(var i=0;i<thisArr.length;i++){
+                var arr=thisArr[i].split("=");
+                if(arr[0].trim()==key){
+                    console.log(arr[1]);
+                }
+            }
+        }
+        function delCookie(key){
+            var timer=new Date();
+            timer.setDate(timer.getDate()-1);
+            document.cookie=key+"=null;expires="+timer.toUTCString();
+        }
+
+
+
+        setCookie("fellow","hello",1);
+        setCookie("fellow2","hi",1);
+        delCookie("fellow");
+        getCookie("fellow2");
+
+    </script>
+</body>
+</html>
