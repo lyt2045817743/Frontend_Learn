@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // // // ①二进制0B 八进制0O
+        // // console.log(0B101,0O101,0x101);  //5 65 257
+        // // //进制之间的转换
+        // // let num=257;
+        // // console.log(num.toString(2)); //100000001        
+        // // console.log(num.toString(8)); //401
+        // // console.log(num.toString(16)); //101  
+
+        // let num=101;
+        // console.log(parseInt(num,2));  //5
+        // console.log(Number.parseInt(num,2));
+
+        // ②是否为数字：Number.isFinite(5);
+
+        // // ③Number.isNaN(NaN)
+        // let num="5";
+        // console.log(Number.isNaN(num));  //false  是一个数字
+        // console.log(5*"5");  //25
+        // console.log(Number.isNaN(5*"5"));  //false
+
+        
+        // console.log(Number.isSafeInteger(Math.pow(2,53)));  //false
+        // console.log(Number.isSafeInteger(Math.pow(2,53)-1));  //true
+
+        
+        
+        console.log(Number.MAX_SAFE_INTEGER);  //9007199254740991
+        console.log(Number.MIN_SAFE_INTEGER );  //-9007199254740991
+    </script>
+</body>
+</html>
