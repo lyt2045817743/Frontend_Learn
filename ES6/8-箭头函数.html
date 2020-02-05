@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // // (1)函数体内的this对象，就是定义时所在的对象，而不是使用时所在的对象。
+        // let name="小明"
+        // let obj={
+        //     name:"abc",
+        //     age:20,
+        //     showName:function(){
+        //         console.log(this.name); //abc
+        //         let foo=()=>{
+        //             console.log(this.name);  // abc 在哪定义的箭头函数，函数里的this 就指谁。
+                    
+        //         }
+        //         foo();
+        //     }
+        // }
+        // obj.showName();
+        
+        // (2)不可以当作构造函数，也就是说，不可以使用new命令，否则会抛出一个错误。
+        
+        let foo=(a,b)=>a+b;        
+        console.log(foo(1,2));  //3
+
+        // (3)不可以使用arguments对象，该对象在函数体内不存在。如果要用，可以用 rest参数代替。    
+        // let foo=()=>{
+        //     console.log(arguments);  //报错 arguments is not defined          
+        // }
+        // foo(1,2,3,4);
+
+        // function foo(){
+        //     console.log(arguments);            
+        // }
+        // foo(1,2,3,4)
+
+        
+        
+    </script>
+</body>
+</html>
