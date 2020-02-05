@@ -61,7 +61,36 @@
 
             //不用let的方法二  略  用oLi[i].index
         
+
+
+        // //const 1.不存在变量提升   Cannot access 'a' before initialization
+        // console.log(a);
+        // const a=10;
+
+        // //const 2.定义的值不能改（const定义的是常量）     Assignment to constant variable.
+        // const a=10;
+        // a=20;
+        // console.log(a);
+
+        // const obj={
+        //     name:"abc"
+        // }
+        // obj.name="bcd"
+        // console.log(obj.name);//bcd
+
+        // const obj={
+        //     name:"abc"
+        // }
+        // obj={}            //地址改了
+        // console.log(obj); //Assignment to constant variable.
         
+        //冻结  定义常量的另一种方法   
+        // var obj={
+        //     name="abc"
+        // }
+        // Object.freeze(obj);
+        // obj.name="bcd";
+        // console.log(obj.name); //Invalid shorthand property initializer
         
 
         
