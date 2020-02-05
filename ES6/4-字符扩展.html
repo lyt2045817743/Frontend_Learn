@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul>
+        <li>
+            <h1>第1行</h1>
+            <h2>第1行信息</h2>
+        </li>
+        <li>
+            <h1>第2行</h1>
+            <h2>第2行信息</h2>
+        </li>
+    </ul>
+    <button>add</button>
+    <script>
+        // let oUl = document.querySelector("ul");
+        // let oBtn = document.querySelector("button");
+        // let num = 2;
+        // oBtn.onclick = function () {
+        //     let str = `<li>
+        //             <h1>第${++num}行</h1>
+        //             <h2>第${num}行信息</h2>
+        //         </li>
+        //     `
+        //     oUl.innerHTML += str;
+        // }
+
+        // // ②includes()	VS	indexOf()
+        // let str="hello world";
+        // console.log(str.includes("hello"));  //true 判断有没有
+        // console.log(str.indexOf("hello"));   //0 判断索引   没有返回-1      
+        
+        // // ③startsWith()	endsWith()
+        // let str="hello world";
+        // console.log(str.startsWith("hello"));  //true   是不是以"hello"开头        
+        // console.log(str.endsWith("world!"));  //false
+        
+        
+        // // ④padStart(5,	‘abc’)	 padEnd()
+        // let str="hello world";
+        // console.log(str.padStart(20,"world"));  //不够20位：前面用world补齐
+        // console.log(str.padEnd(20,"world"));   //不够20位：后面用world补齐
+        
+        // // ⑤repeat(5)
+        // let str="hello "
+        // console.log(str.repeat(3));  //hello hello hello
+
+        //自己写startsWith()
+        String.prototype.sw=function(smallStr){
+            // console.log(this);            
+            if(this.indexOf(smallStr)==0){
+                return true;
+            }
+            return false;
+        }
+        let str="hello world";
+        console.log(str.sw("ohello"));
+        
+    </script>
+</body>
+
+</html>
