@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // let thisSet=new Set();
+        // thisSet.add("abc");
+        // thisSet.add([1,2,3]);
+        // thisSet.add("abc");
+        // // thisSet.delete("abc");
+        // // thisSet.clear();
+        // // console.log(thisSet);
+        // // console.log(thisSet.size);
+        // // console.log(thisSet.has("abc"));
+        // for(let value of thisSet){
+        //     console.log(value);
+        // }
+
+        // //WeakSet
+        // let thatSet=new WeakSet();
+        // thatSet.add({name:"abc"});
+        // console.log(thatSet);
+                
+        //数组去重
+        let arr=[1,2,3,3,3,4,5,6];
+        let thisSet=new Set(arr);
+        console.log(Array.from(thisSet));
+        
+
+
+    </script>
+</body>
+</html>
