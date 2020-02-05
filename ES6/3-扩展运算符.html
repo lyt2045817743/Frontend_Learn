@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // //扩展运算符当形参 -> 不确定参数
+        // function foo(...arg){
+        //     console.log(arg);       
+        // }
+        // foo(1,2,3,4,5,6,7);
+
+        // //扩展运算符作为数组的一部分
+        // let arr1=[1,2,3,4];
+        // let arr2=[1,2,...arr1,3,4];
+        // console.log(arr2);  //1 2 1 2 3 4 3 4
+        
+        // //数组复制
+        // let arr1=[1,2,3,4];
+        // let arr2=[...arr1];
+        // arr1[1]=0; //单层完全复制，对原数组的操作并不会影响arr2的值
+        // console.log(arr2);
+        
+        // //合并数组
+        // let arr1=[1,2,3];
+        // let arr2=[4,5,6];
+        // let arr3=[...arr1,...arr2];
+        // console.log(arr3);     
+
+        // //合并对象
+        // let obj={
+        //     name:"abc",
+        //     age:20
+        // }
+        // let obj2={
+        //     name:"bcd",
+        //     school:"林大"
+        // }
+        // let obj3={...obj,...obj2}  //如果两个合并的对象中有相同的key值，则后者会把前者的值覆盖，之后赋值给obj3
+        // console.log(obj3);
+        
+        // //解构
+        // let arr=[1,2];
+        // let [a,b,c]=[3,...arr];
+        // console.log(a,b,c);  //3 1 2
+        
+        // //剩余运算符
+        // // function foo(a,...arg){
+        // //     console.log(a);
+        // //     console.log(arg);                      
+        // // }
+        // // foo(1,2,3,4,5)
+        // function foo(a,...arg,b){
+        //     console.log(a);
+        //     console.log(arg);   
+        //     console.log(b);  // Rest parameter must be last formal parameter
+                               
+        // }
+        // foo(1,2,3,4,5)
+
+
+    </script>
+</body>
+</html>
