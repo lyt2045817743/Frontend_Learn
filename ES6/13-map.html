@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //①类似于对象，也是键值对的集合，但是“键”的范围不限于字 符串，各种类型的值（包括对象）都可以当作键。new	Map()
+        let map1=new Map();
+        
+        
+        // //③.set(key,	value) 
+        // map1.set("name","abc");
+        // map1.set({name:"小明"},"学生");
+        // //④.get(key)        
+        // console.log(map1.get("name"));  //abc
+        
+        // //⑤.has(key)
+        // console.log(map1.has("name"));  //true
+        
+        // //⑥. delete(key) 
+        // // map1.delete({name:'小明'}); //只有给对象命名才能删掉         ????????????????????为什么不好使
+        // map1.delete("name");
+        // //⑦. clear()
+        // map1.clear();       
+        // console.log(map1);
+        // //②.size属性返回 Map	结构的成员总数
+        // console.log(map1.size);
+
+         // ⑧遍历 ⑨WeakMap：只接受对象作为键名（null除外），不接受其他类 型的值作为键名。
+        let wm=new WeakMap();
+        let obj={
+            name:"abc",
+            age:20
+        }
+        wm.set(obj,"学生");
+        wm.delete(obj);
+        console.log(wm);
+        
+        
+    </script>
+</body>
+</html>
