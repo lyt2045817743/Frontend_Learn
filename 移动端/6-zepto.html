@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./js/zepto.js"></script>
+    <script src="./js/touch.js"></script>
+    <style>
+        .div1{
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .div2{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="div1"></div>
+    <div class="div2"></div>
+    <script>
+        $(".div1").on("touchstart",function(e){
+            $(this).hide();
+            console.log("touchstart");
+            e.preventDefault();
+        })
+        $(".div2").click(function(){
+            console.log("click");
+            
+        })
+    </script>
+</body>
+</html>

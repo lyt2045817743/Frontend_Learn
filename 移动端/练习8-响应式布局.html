@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            min-width: 300px;
+        }
+
+        header,nav,footer {
+            height: 80px;
+            background-color: #999;
+            font-size: 45px;
+            margin-bottom: 10px;
+            line-height: 80px;
+            text-align: center;
+        }
+
+        footer{
+            margin-top: 10px; 
+        }
+        .img{            
+            background-image: url('./img/01_s.jpg');
+            background-size: cover;
+            padding-bottom: 56%;
+            background-repeat: no-repeat;
+        }
+        article, aside {
+            height: 300px;
+
+        }
+        article{
+            background-color: blue;
+            width: 45%;
+            position: relative;
+        }
+        aside{
+            background-color: red;
+            width: 50%;
+            margin-right: 0;
+            margin-left: auto;
+            margin-top: -300px;
+            position: relative;
+        }
+        p{
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        @media (max-width:450px){
+            article,aside{
+                width: 100%;
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>页头</header>
+        <nav>导航</nav>
+        <div class="img"></div>
+        <article>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sem erat, egestas quis luctus ut,
+                rhoncus
+                vitae risus. Integer venenatis libero sit amet sapien dictum, quis bibendum mi volutpat. Cras pretium
+                quam
+                quis
+                magna facilisis, eget feugiat nisi lacinia.
+            </p>
+        </article>
+        <aside>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sem erat, egestas quis luctus ut,
+                rhoncus
+                vitae risus. Integer venenatis libero sit amet sapien dictum, quis bibendum mi volutpat. Cras pretium
+                quam
+                quis
+                magna facilisis, eget feugiat nisi lacinia.
+            </p>
+        </aside>
+        <footer>页脚</footer>
+    </div>
+</body>
+
+</html>
