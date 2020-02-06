@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+    <script>
+        // // ①Array.from()	json数组格式、类数组 
+        // // //类数组
+        // // var oLi=document.querySelectorAll("li");
+        // // console.log(Array.from(oLi));
+        // let json1={
+        //     "0":"abc",
+        //     "1":"bcd",
+        //     length:2 //(2) ["abc", "bcd"]    必须写长度
+        //     // length:1  //["abc"]
+        // }
+        // console.log(Array.from(json1));
+        
+
+        // //②Array.of()	将一组值，转换为数组。 
+        // console.log(Array.of(1,"abc",[2,1],{name:"abc"}));  //(4) [1, "abc", Array(2), {…}]
+        
+
+        // //③arr.copyWithin(target,	start	=	0,	end	=	this.length)
+        //     // target（必需）：从该位置开始替换数据。
+        //     // start（可选）：从该位置开始读取数据，默认为0。如 果为负值，表示倒数。
+        //     // end（可选）：到该位置前停止读取数据，默认等于数 组长度。如果为负值，表示倒数。 
+        // let arr=[1,2,3,4,5,6];  
+        // arr.copyWithin(1,2,4);
+        // console.log(arr);  //1 3 4 4 5 6
+        
+
+        // //④arr.find(function(val,	key,	arr){});用于找出第一个符合条 件的数组成员 
+        // let arr=[0,1,2,3,4,5];
+        // // let arr2=arr.find(function(val,key,arr){
+        // //     return val>2;
+        // // })
+        // // console.log(arr2);  //3    符合条件的数值
+
+        // // //arr.findIndex()
+        // let num=arr.findIndex(function(val,key,arr){
+        //     return val>3;
+        // })
+        // console.log(num);  //4  符合条件的数值的索引       
+
+
+        // // ①arr.fill(’xx’,	1,	3);		
+        // let arr=[1,2,3,4,5,6];
+        // arr.fill("xx",1,3);
+        // console.log(arr);  //(6) [1, "xx", "xx", 4, 5, 6]
+
+        // // //new	Array(3).fill(7)	
+        // let arr=new Array(3).fill("xx");
+        // console.log(arr);  //(3) ["xx", "xx", "xx"]
+        
+        
+        // // // ②arr.includes()数组是否包含给定的值，与字符串的 includes方法类似
+        // let arr=["hello","world","fellow"];        
+        // // console.log(arr.includes("hello"));  //true
+
+        // console.log(arr.indexOf("world"));  1
+        
+        
+        // // ③for	…of循环 ④entries()，keys()——用于遍历数组 
+        // let arr=["hello","world","fellow"];   
+        // // for(let val of arr){
+        // //     console.log(val);
+            
+        // // }
+        // // for(let key of arr.keys()){
+        // //     console.log(key);  //0 1 2
+            
+        // // }
+        // for(let [key,val] of arr.entries()){
+        //     console.log(key,val);  //0 hello 1 world 2 fellow
+            
+        // }
+
+
+        //⑤数组遍历：
+            // // forEach():没有返回值，只是针对每个元素调用func
+            // let arr=["hello","world","fellow"];   
+            // arr.forEach(function(val,key,arr){
+            //     console.log(val,key);
+                
+            // })
+
+            // // map():返回一 个新的Array，每个元素为调用func的结果（可以改数组里的值，但不能改变它的长度）
+            // let arr=["hello","world","fellow"];   
+            // let arr2=arr.map(function(val,key,arr){
+            //     if(val!="hello"){
+            //         return val;
+            //     }
+            //     // else{
+            //     //     return "xxx";   //如果没有else,就会在hello位置返回一个undefined
+            //     // }
+            // })
+            // console.log(arr2);  //(3) ["xxx", "world", "fellow"]
+            
+
+            // // filter():返回一个符合func条件的元素数组 （不可以改数组里的值，但它能改变它的长度）
+            // let arr=["hello","world","fellow"];   
+            // let arr2=arr.filter(function(val,key,arr){
+            //     if(val=="hello"){
+            //         return false;
+            //     }
+            //     else{
+            //         return true;  //如果没有else,则返回一个空数组（默认return false）
+            //     }
+            // })
+            // console.log(arr2);
+            
+            // // some():返回一个boolean，判断是否有元素是否符合func条件
+            // let arr=["hello","world","fellow"];   
+            // console.log(arr.some(function(val,key,arr){  //true
+            //     if(val=="hello"){
+            //         return val;   //只要不是0  undefined false null ""则返回的都是true
+            //     }
+            // }));
+            
+            // every():返回一个boolean，判断每个元素是否符合func条件
+            let arr=["hello","world","fellow"];   
+            console.log(arr.every(function(val,key,arr){  //true
+                if(val=="hello"){
+                    return val;   
+                }
+            }));
+    </script>
+   
+</body>
+</html>
