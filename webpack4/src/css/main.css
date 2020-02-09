@@ -1,0 +1,10 @@
+#div1{
+    width: 200px;
+    height: 200px;
+    background-color: red;
+}
+#div2{
+    width: 400px;
+    height: 400px;
+    background-image: url("../images/img01.jpg");
+}
