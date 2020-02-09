@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    li{
+      list-style: none;
+    }
+    *{
+      margin:0;
+      padding: 0;
+    }
+    body{
+      background-color: black;
+    }
+    .big-box{
+      position:relative;
+      margin: 0 auto;
+      width:490px;
+      height:170px; 
+      overflow: hidden;
+    }
+    .imgs ul{
+      width: 2940px;
+      position:absolute;
+    }
+    .imgs ul li{
+      float: left;
+    }
+    #btn {
+      width: 100%;
+      position: absolute;
+      bottom: 10px;
+      z-index: 10;
+    }
+
+  #btn ul li {
+      float: left;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: #f90;
+      text-align: center;
+      line-height: 20px;
+      color: white;
+      margin-left: 10px;
+    }
+    #left-btn {
+      float: left;
+    }
+
+    #right-btn {
+      float: right;
+    }
+    #right-btn .active{
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+    <div class="big-box">
+      <div class="imgs">
+        <ul>
+          <li><img src="BOM&DOM/images/01.jpg"></li>
+          <li><img src="BOM&DOM/images/02.jpg"></li>
+          <li><img src="BOM&DOM/images/03.jpg"></li>
+          <li><img src="BOM&DOM/images/04.jpg"></li>
+          <li><img src="BOM&DOM/images/05.jpg"></li>
+          <li><img src="BOM&DOM/images/01.jpg"></li>
+        </ul>
+      </div>
+      <div id="btn">
+        <div id="left-btn">
+          <ul>
+            <li>&lt;</li>
+            <li>&gt;</li>
+          </ul>
+        </div>
+        <div id="right-btn">
+          <ul>
+            <li class="active">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <script>
+      var oimg=document.getElementsByClassName("imgs")[0].getElementsByTagName("ul")[0];
+      var leftBtn=document.getElementById("left-btn").getElementsByTagName("li");
+      var rightBtn=document.getElementById("right-btn").getElementsByTagName("li");
+      var oBox=document.getElementsByClassName("big-box")[0];
+      var direction=0;
+      var timer=null;
+      var timer2=null;
+      var nowIndex=0;
+      var isPlay=true;
+
+      //切换图片函数
+      function changeImg(index){
+        console.log(isPlay)
+        if(!isPlay) return false
+        isPlay = false
+        clearInterval(timer);
+        //判断是否为向左切换按钮
+        console.log(nowIndex,index)
+        if(index<nowIndex){
+          direction=1;
+        }
+        else{
+          direction=-1;
+        }
+
+        timer=setInterval(function(){
+          if(oimg.offsetLeft==-index*490){
+            clearInterval(timer);
+            isPlay=true;
+            nowIndex=index;
+            if(index==5){
+              oimg.style.left=0;
+              nowIndex=0;
+            }
+          }
+          else{
+            oimg.style.left=oimg.offsetLeft+direction*10+"px";
+          }  
+        },16)
+
+        for(var i=0;i<rightBtn.length;i++){
+            rightBtn[i].className="";
+          }
+          if(index==5){
+            rightBtn[0].className="active";
+          }
+          else{
+            rightBtn[index].className="active";
+          }
+      }
+
+      //为左边按钮添加鼠标点击事件
+      leftBtn[0].onclick=function(){
+        if((nowIndex-1)==-1){
+          oimg.style.left="-2450px";
+          nowIndex=5;
+          changeImg(4);
+        }
+        else{
+          changeImg(nowIndex-1);
+        }
+      }
+      leftBtn[1].onclick=function(){
+          changeImg(nowIndex+1);
+      }
+
+      //为数字按钮添加点击事件
+      for(var i=0;i<rightBtn.length;i++){
+        rightBtn[i].index=i;
+        rightBtn[i].onclick=function(){
+          clearInterval(timer2);
+          changeImg(this.index);
+        }
+      }
+
+      //定时函数
+      function play(){
+        timer2=setInterval(function(){
+          if(isPlay){
+            changeImg(nowIndex+1);
+          }
+        },2000)
+      }
+      play();
+
+      //鼠标移入时停止定时函数
+      oBox.onmouseover=function(){
+        clearInterval(timer2);
+      }
+      oBox.onmouseout=function(){
+        console.log("out");
+        
+        play();
+      }
+    </script>
+</body>
+</html>

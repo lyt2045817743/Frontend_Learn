@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        img{
+            width: 200px;
+            height: 200px;
+        }
+        #box{
+            background-color: aliceblue;
+            opacity: .5;
+            width:100px;
+            height:100px;
+            position:absolute;
+            top:0;
+            left:0;
+            
+        }
+        .big-box{
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div class="big-box">
+        <img src="./BOM&DOM/images/niu.png" alt="">
+        <div id="box"></div>
+    </div>
+    <script>
+        var oBox=document.getElementById("box");
+        var oImg=document.getElementsByClassName("big-box")[0];
+
+            oImg.onmousemove=function(e){ 
+                var thisLeft = e.clientX;
+                var thisTop = e.clientY;
+                
+                if(thisLeft>=150){
+                    thisLeft = 150
+                }
+                if(thisLeft<=50){
+                    thisLeft = 50
+                }
+                if(thisTop<=50){
+                    thisTop=50
+                }
+                if(thisTop>=150){
+                    thisTop = 150;
+                }
+                oBox.style.top = thisTop - 50+"px";
+                oBox.style.left = thisLeft - 50+"px";
+            }
+
+    </script>
+</body>
+</html>

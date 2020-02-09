@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            width:300px;
+            height:100px;
+            background-color: red;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <script>
+        var oBox=document.getElementsByClassName("box");
+        //var timer=null;
+        for(var i=0;i<oBox.length;i++){
+            //鼠标覆盖事件
+            oBox[i].timer=null;
+            oBox[i].onmouseover=function(){
+                clearInterval(this.timer);
+                console.log(this.timer);
+                //console.log(typeof(timer));
+                var _this=this;
+                _this.timer=setInterval(function(){
+                    if(_this.offsetWidth>=500){
+                    clearInterval(_this.timer);
+                    console.log(_this.timer);
+                    
+                    }
+                    //console.log(_this.offsetWidth);
+                    _this.style.width=(_this.offsetWidth+10)+"px";
+                },16)
+                
+            }
+            
+            //鼠标移出事件
+            oBox[i].onmouseout=function(){
+                clearInterval(this.timer);
+                console.log(this.timer);
+                var _this=this;
+                _this.timer=setInterval(function(){
+                    if(_this.offsetWidth<=300){
+                    clearInterval(_this.timer);
+                    }
+                    //console.log(_this.offsetWidth);
+                    else{
+                        _this.style.width=(_this.offsetWidth-10)+"px";
+                    }               
+                },16)
+            }
+        }
+        
+    </script>
+</body>
+</html>

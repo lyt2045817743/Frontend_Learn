@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+          width: 600px;
+          margin:100px auto;
+          border:1px solid #999;
+        }
+        .top{
+          height: 225px;
+          text-align: center;
+        }
+        .top img{
+          height: 220px;
+        }
+        .bottom{
+          border-top:1px solid #999;
+          height: 125px;
+        }
+        .slider-item{
+          float: left;
+          width: 149px;
+          border-right: 1px solid #999;
+          text-align: center;
+        }
+        .slider-item:last-child{
+          border-right: none;
+        }
+        .slider-item img{
+          width: 120px;
+        }
+      </style>
+</head>
+<body>
+    <div class="box">
+        <div calss="top">
+                <img id="big-img" src="./images/img1.jpg" alt="">
+        </div>
+        <div class="bottom">
+            
+            
+            <div class="slider-item">
+                <img src="./images/flower.jpg" alt="">
+            </div>
+            <div class="slider-item">
+                <img src="./images/img1.jpg" alt="">
+            </div>
+            <div class="slider-item">
+                <img src="./images/road.jpg" alt="">
+            </div>
+            <div class="slider-item">
+                    <img src="./images/build.jpg" alt="">
+            </div>
+        </div>
+    </div> 
+    <script>
+        var aImg=document.getElementsByClassName('bottom')[0].getElementsByTagName('img');
+        var oImg=document.getElementById('big-img');
+        for(var i=0;i<aImg.length;i++){
+            aImg[i].onmouseover=function(){
+                var thisimg=this.getAttribute('src');
+                oImg.setAttribute('src',thisimg);
+            }
+        }
+
+    </script>
+</body>
+</html>

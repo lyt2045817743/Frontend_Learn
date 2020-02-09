@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="box">
+        <div class="div1">
+            test1
+            <button class="up">向上</button>
+            <button class="down">向下</button>
+        </div>
+        <div class="div2">
+            test2
+            <button class="up">向上</button>
+            <button class="down">向下</button>
+        </div>
+        <div class="div3">
+            test3
+            <button class="up">向上</button>
+            <button class="down">向下</button>
+        </div>
+    </div>
+    <script>
+
+
+        //?????
+        var oBox = document.querySelector(".box");
+        for (var i = 0; i < oBox.children.length; i++) {
+            var thisDiv = oBox.children[i];
+            thisDiv.index=i;
+            thisDiv.children[0].onclick = function () {
+                if(oBox.children[this.index - 1]){
+                    oBox.insertBefore(oBox.children[this.index - 1], oBox.children[this.index ]);
+                }
+            }
+
+            thisDiv.children[1].onclick = function () {
+                if( oBox.children[this.index + 1]){
+                    oBox.insertBefore(oBox.children[this.index ], oBox.children[this.index + 1]);
+                }
+            }
+        }
+
+
+
+
+
+        // var thisDiv = oBox.children[0];
+        // console.log(thisDiv.children[0])
+        // console.log(typeof(thisDiv.children[0]))
+        // var oDiv1=oBox.querySelectorAll(".up")[0];
+        // console.log(oDiv1)
+        // console.log(typeof(oDiv1))
+    </script>
+</body>
+
+</html>

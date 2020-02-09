@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box{
+            width:500px;
+            height:50px;
+            border: 1px black solid;
+            border-radius: 30px;
+        }
+        #go{
+            width:0;
+            height:50px;
+            background-color: aqua;
+            margin-bottom: 10px;
+            border-radius: 30px;
+            line-height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <div id="go">
+            <span id="inner">0</span>%
+        </div>
+        <button id="btn">开始</button>
+    </div>
+    <script>
+        var oBtn=document.getElementById("btn");
+        //var oBtn1=document.getElementsByTagName("button");
+        var oGo=document.getElementById("go");
+        var oText=document.getElementById("inner");
+        var timer=null;
+        oBtn.onclick=function(){
+            timer=setInterval(function(){
+                if(oGo.offsetWidth>=500){
+                    clearInterval(timer);
+                }else{
+                    oGo.style.width=(oGo.offsetWidth+10)+"px";
+                    oText.innerText=parseInt(oGo.offsetWidth/500*100);
+                    //console.log(oGo.offsetWidth);
+                }
+            },16)
+        }
+        // oBtn1[0].onclick=function(){
+        //     console.log("hello");
+        // }
+    </script>
+</body>
+</html>

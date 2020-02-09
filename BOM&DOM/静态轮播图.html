@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        body{
+            background-color:black;
+        }
+        li{
+            list-style:none;
+        }
+        .box{
+            border:5px soild white;
+            margin:0 auto;
+            width:490px;
+            height:170px;
+            position: relative;
+        }
+        .swiper-img li{
+            position:absolute;
+            top:0;
+            left:0;
+        }
+        .swiper-btn li{
+            display: inline-block;
+            width:20px;
+            height:20px;
+            border-radius:50%;
+            background-color: #f90;
+            text-align: center;
+            line-height: 20px;
+            color: #fff;
+        }
+        .swiper-btn{
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            z-index: 101;
+        }
+        .right-btn{
+            float: right;
+        
+        }
+        .left-btn{
+            float: left;
+        }
+        .right-btn .active{
+            background-color: red;
+        }
+        .swiper-img .active{
+            z-index: 100;
+        }
+        img{
+            width:490px;
+            height:170px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="swiper-img">
+            <ul>
+                <li class="active"><img src="./images/build.jpg" alt=""></li>
+                <li><img src="./images/flower.jpg" alt=""></li>
+                <li><img src="./images/img1.jpg" alt=""></li>
+                <li><img src="./images/road.jpg" alt=""></li>
+                <li><img src="./images/flower.jpg" alt=""></li>
+            </ul>
+        </div>
+        <div class="swiper-btn">
+            <div class="left-btn">
+                <ul>
+                    <li>&lt;</li>
+                    <li>&gt;</li>
+                </ul>
+            </div>
+            <div class="right-btn">
+                <ul>
+                    <li class="active">1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                </ul>
+            </div>               
+        </div>
+    </div>
+    <script>
+        var aBtn=document.getElementsByClassName("right-btn")[0].getElementsByTagName("li");
+        var aImg=document.getElementsByClassName("swiper-img")[0].getElementsByTagName("li");
+        var aBtn2=document.getElementsByClassName("left-btn")[0].getElementsByTagName("li");
+        var oBox=document.getElementsByClassName("box")[0];
+        var nowIndex=0;
+        var timer=null;
+
+        //切换图片函数
+        function changeIndex(index){
+            //nowIndex=index;
+            for(var j=0;j<aImg.length;j++){
+                    aImg[j].className="";
+                    aBtn[j].className="";
+                }
+                aImg[index].className="active";
+                aBtn[index].className="active";
+        }
+        
+        //定义一个自动播放的函数
+        
+        function play(){
+            timer=setInterval(function(){
+                nowIndex++;
+                if(nowIndex==5){
+                    nowIndex=0;
+                }
+                changeIndex(nowIndex);
+            },1000)
+        }
+
+        //鼠标移入
+        oBox.onmouseover=function(){
+            clearInterval(timer);
+        }
+        //鼠标移出
+        oBox.onmouseout=function(){
+            play();
+        }
+        //给右边每一个按钮定义一个鼠标覆盖事件
+        for(var i=0;i<aBtn.length;i++){
+            aBtn[i].index=i;
+            aBtn[i].onmouseover=function(){
+                changeIndex(this.index);
+            }
+        }        
+        //给左边按钮定义鼠标点击事件
+        //左
+        aBtn2[0].onclick=function(){
+            nowIndex--;
+            if(nowIndex==-1){
+                nowIndex=4;
+            }
+            changeIndex(nowIndex);
+        }
+        //右
+        aBtn2[1].onclick=function(){
+            nowIndex++;
+            if(nowIndex==5){
+                nowIndex=0;
+            }
+            changeIndex(nowIndex);
+        }
+        play();
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        select{
+            width:150px;
+            height:200px;
+        }
+        span{
+            background-color: gray;
+            color:aliceblue;
+            width:150px;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+        #div{
+            float: left;
+            text-align: center;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+        <div id="div">
+            <select multiple id="sel1">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+            </select><br/>
+            <span id="add">选中添加到右边>></span><br/>
+            <span id="add_all">全部添加到右边>></span>
+        </div>
+        <div id="div">
+            <select multiple id="sel2">
+                    <option>8</option>
+            </select><br/>
+            <span id="remove">&lt;&lt;选中添加到左边</span><br/>
+            <span id="remove_all">&lt;&lt;全部添加到左边</span>
+        </div>
+    <script>
+        var sel1=document.getElementById("sel1");
+        var sel2=document.getElementById("sel2");
+        var addBtn=document.getElementById("add");
+        var removeBtn=document.getElementById("remove");
+        var addAllBtn=document.getElementById("add_all");
+        var removeAllBtn=document.getElementById("remove_all");
+
+
+        //左边双击事件
+        sel1.ondblclick=function(){
+            sel2.appendChild(this.options[this.selectedIndex])
+        }
+        //右边双击事件
+        sel2.ondblclick=function(){
+            sel1.appendChild(this.options[this.selectedIndex])
+        }
+        
+
+        //左边多选移动
+        addBtn.onclick=function(){
+            var arr=[];
+            for(var i=0;i<sel1.options.length;i++){
+                if(sel1.options[i].selected){
+                    arr.push(sel1.options[i])
+                }
+            }
+            for(var j=0;j<arr.length;j++){
+                sel2.appendChild(arr[j]);
+            }
+        }
+
+        //右边多选移动
+        removeBtn.onclick=function(){
+            var arr=[];
+            for(var i=0;i<sel2.options.length;i++){
+                if(sel2.options[i].selected){
+                    arr.push(sel2.options[i])
+                }
+            }
+            for(var j=0;j<arr.length;j++){
+                sel1.appendChild(arr[j]);
+            }
+        }
+
+        //左边全部移动到右边
+        addAllBtn.onclick=function(){
+            var arr=[];
+            for(var i=0;i<sel1.options.length;i++){
+                    arr.push(sel1.options[i])
+            }
+            for(var j=0;j<arr.length;j++){
+                sel2.appendChild(arr[j]);
+            }
+        }
+
+
+        //右边全部移动到左边
+        removeAllBtn.onclick=function(){
+            var arr=[];
+            for(var i=0;i<sel2.options.length;i++){
+                    arr.push(sel2.options[i])
+            }
+            for(var j=0;j<arr.length;j++){
+                sel1.appendChild(arr[j]);
+            }
+        }
+
+
+
+
+
+    </script>
+</body>
+</html>
