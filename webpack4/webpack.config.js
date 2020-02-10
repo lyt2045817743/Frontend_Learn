@@ -22,6 +22,10 @@ module.exports={
                 })
             },
             {
+                test: /\.(htm|html)$/i,
+                loader: 'html-withimg-loader'
+            },
+            {
                 test:/\.(jpg|png|gif)$/,
                 use:[{
                     loader:"url-loader",
@@ -30,6 +34,10 @@ module.exports={
                         outputPath:'images/'
                     }
                 }]
+            },
+            {
+                test:/\.scss/,
+                use:['style-loader','css-loader','sass-loader']
             }
         ]
     },
