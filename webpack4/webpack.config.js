@@ -4,12 +4,11 @@ const HtmlWebpackPlugin=require('html-webpack-plugin');
 const ExtractTextPlugin=require("extract-text-webpack-plugin")
 const glob=require('glob');
 const PurifycssWebpack=require("purifycss-webpack");
+const entry=require("./src/webpack_config/webpack_entry");
 
 module.exports={
     mode:"development",
-    entry:{
-        'index':'./src/index.js'
-    },
+    entry,
     output:{
         path:path.resolve(__dirname,'dist'),
         filename:'[name].js',
@@ -73,8 +72,9 @@ module.exports={
         new ExtractTextPlugin("css/main.css"),
         new PurifycssWebpack({
             paths:glob.sync(path.join(__dirname,'./src/*.html')),
-        })
-
+        }),
+        new webpack.BannerPlugin('fellow37'),
+        new webpack.ProvidePlugin({$:"jquery"})
     ],
     devServer:{
         contentBase:path.resolve(__dirname,'dist'),

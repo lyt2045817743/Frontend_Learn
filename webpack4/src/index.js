@@ -1,5 +1,6 @@
 import css from "./css/main.css";
 import sass from './style/test.scss'
+
 window.onload=function(){
     let str="hello world";
     let oDiv1=document.getElementById("div1");
@@ -7,4 +8,5 @@ window.onload=function(){
     
     oDiv1.innerText=str;
     let foo=(a,b)=>a+b;
+    $('#div3').text("hello fellow37");
 }
