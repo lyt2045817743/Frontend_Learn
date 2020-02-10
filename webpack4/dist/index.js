@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "84a53d103b96ea96f295";
+/******/ 	var hotCurrentHash = "9982489ce8f5a0a79a53";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -815,7 +815,7 @@ eval("// removed by extract-text-webpack-plugin\n\n//# sourceURL=webpack:///./sr
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _css_main_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./css/main.css */ \"./src/css/main.css\");\n/* harmony import */ var _css_main_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_css_main_css__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _style_test_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style/test.scss */ \"./src/style/test.scss\");\n/* harmony import */ var _style_test_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_style_test_scss__WEBPACK_IMPORTED_MODULE_1__);\n\r\n\r\nwindow.onload=function(){\r\n    let str=\"hello world\";\r\n    let oDiv1=document.getElementById(\"div1\");\r\n    console.log(\"hello\");\r\n    \r\n    oDiv1.innerText=str;\r\n}\r\n\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _css_main_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./css/main.css */ \"./src/css/main.css\");\n/* harmony import */ var _css_main_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_css_main_css__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _style_test_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style/test.scss */ \"./src/style/test.scss\");\n/* harmony import */ var _style_test_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_style_test_scss__WEBPACK_IMPORTED_MODULE_1__);\n\n\n\nwindow.onload = function () {\n  var str = \"hello world\";\n  var oDiv1 = document.getElementById(\"div1\");\n  console.log(\"hello\");\n  oDiv1.innerText = str;\n\n  var foo = function foo(a, b) {\n    return a + b;\n  };\n};\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ }),
 

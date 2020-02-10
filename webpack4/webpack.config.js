@@ -2,6 +2,9 @@ const path=require("path");
 const webpack=require("webpack");
 const HtmlWebpackPlugin=require('html-webpack-plugin');
 const ExtractTextPlugin=require("extract-text-webpack-plugin")
+const glob=require('glob');
+const PurifycssWebpack=require("purifycss-webpack");
+
 module.exports={
     mode:"development",
     entry:{
@@ -34,7 +37,8 @@ module.exports={
                     loader:"url-loader",
                     options:{
                         limit:500,
-                        outputPath:'images/'
+                        outputPath:'images/',
+                        esModule:false
                     }
                 }]
             },
@@ -44,6 +48,16 @@ module.exports={
                     fallback:'style-loader',
                     use:['css-loader','sass-loader']
                 })
+            },
+            {
+                test:/\.(jsx|js)$/,
+                use:{
+                    loader:'babel-loader',
+                    options:{
+                        presets:['@babel/preset-env']
+                    }
+                },
+                exclude:/node_modules/
             }
         ]
     },
@@ -56,7 +70,11 @@ module.exports={
                 removeAttributeQuotes:true
             }
         }),
-        new ExtractTextPlugin("css/main.css")
+        new ExtractTextPlugin("css/main.css"),
+        new PurifycssWebpack({
+            paths:glob.sync(path.join(__dirname,'./src/*.html')),
+        })
+
     ],
     devServer:{
         contentBase:path.resolve(__dirname,'dist'),

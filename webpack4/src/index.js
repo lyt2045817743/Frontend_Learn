@@ -6,4 +6,5 @@ window.onload=function(){
     console.log("hello");
     
     oDiv1.innerText=str;
+    let foo=(a,b)=>a+b;
 }
