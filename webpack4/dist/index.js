@@ -64,7 +64,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "39aac5b9925b657bc999";
+/******/ 	var hotCurrentHash = "c01518524406e5f35386";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -827,7 +827,18 @@ eval("// removed by extract-text-webpack-plugin\n\n//# sourceURL=webpack:///./sr
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _css_main_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./css/main.css */ \"./src/css/main.css\");\n/* harmony import */ var _css_main_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_css_main_css__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _style_test_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style/test.scss */ \"./src/style/test.scss\");\n/* harmony import */ var _style_test_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_style_test_scss__WEBPACK_IMPORTED_MODULE_1__);\n\n\n\nwindow.onload = function () {\n  var str = \"hello world\";\n  var oDiv1 = document.getElementById(\"div1\");\n  console.log(\"hello\");\n  oDiv1.innerText = str;\n\n  var foo = function foo(a, b) {\n    return a + b;\n  };\n\n  $('#div3').text(\"hello fellow37\");\n};\n/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ \"./node_modules/_jquery@3.4.1@jquery/dist/jquery.js\")))\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _css_main_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./css/main.css */ \"./src/css/main.css\");\n/* harmony import */ var _css_main_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_css_main_css__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _style_test_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style/test.scss */ \"./src/style/test.scss\");\n/* harmony import */ var _style_test_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_style_test_scss__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _info_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./info.json */ \"./src/info.json\");\nvar _info_json__WEBPACK_IMPORTED_MODULE_2___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./info.json */ \"./src/info.json\", 1);\n\n\n\n\nwindow.onload = function () {\n  var str = \"hello world\";\n  var oDiv1 = document.getElementById(\"div1\");\n  console.log(\"hello\");\n  oDiv1.innerText = str;\n\n  var foo = function foo(a, b) {\n    return a + b;\n  };\n\n  $('#div3').text(\"\\u59D3\\u540D:\".concat(_info_json__WEBPACK_IMPORTED_MODULE_2__.name, \"\\u5B66\\u6821:\").concat(_info_json__WEBPACK_IMPORTED_MODULE_2__.school, \"\\u5E74\\u9F84:\").concat(_info_json__WEBPACK_IMPORTED_MODULE_2__.age));\n};\n/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ \"./node_modules/_jquery@3.4.1@jquery/dist/jquery.js\")))\n\n//# sourceURL=webpack:///./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/info.json":
+/*!***********************!*\
+  !*** ./src/info.json ***!
+  \***********************/
+/*! exports provided: name, age, school, default */
+/***/ (function(module) {
+
+eval("module.exports = JSON.parse(\"{\\\"name\\\":\\\"小刘\\\",\\\"age\\\":21,\\\"school\\\":\\\"林大\\\"}\");\n\n//# sourceURL=webpack:///./src/info.json?");
 
 /***/ }),
 
