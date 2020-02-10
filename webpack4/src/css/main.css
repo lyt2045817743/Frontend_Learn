@@ -7,4 +7,9 @@
     width: 400px;
     height: 400px;
     background-image: url("../images/img01.jpg");
+    background-repeat: no-repeat;
+    transform: rotate(30deg);
+}
+::placeholder{
+    color: gray;
 }
