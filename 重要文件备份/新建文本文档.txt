@@ -1,0 +1,59 @@
+清除未使用的css
+const glob=require('glob');
+
+const PurifyCSSPlugin=require("purifycss-webpack");
+
+new PurifyCSSPlugin({
+	paths:glob.sync(path.join(__dirname,'./src/*.html')),
+})
+
+babel
+{
+	test:/\.(jsx|js)$/,
+	use:{
+		loader:'babel-loader',
+		options:{
+			presets:['@babel/preset-env']
+		}
+	},
+	exclude:/node_modules/
+}
+
+打包注释
+new webpack.BannerPlugin()
+
+模块化配置
+const entry={entry:'./src/entry.js'};
+module.exports=entry;
+
+const entry=require("./webpack_config/entry_webpack.js");
+
+module.exports={entry:entry,}
+
+打包第三方类库1
+import $ from 'jquery';
+
+const webpack=require("webpack");
+
+new webpack.ProvidePlugin({$:"jquery"})
+
+资源拷贝
+var CopyWebpackPlugin=require('copy-webpack-plugin');
+
+new CopyWebpackPlugin([{from:__dirname+'/src/public',to:'./public'}])
+
+json文件
+{"name":"","age":21,"school":""}
+
+let json=require('../author.json');
+document.querySelector('#json').innerHTML=
+
+
+
+
+
+
+
+
+
+
