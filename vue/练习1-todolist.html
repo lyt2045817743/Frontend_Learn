@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" placeholder="搜索名称" v-model="searchName">
+        <button v-on:click="search">搜索</button><br/>
+        商品名称
+        <input type="text" placeholder="请输入商品名称" v-model="name">
+        商品价格
+        <input type="text" placeholder="请输入商品价格" v-model.number="price">
+        <button @click="addGoods">添加</button>
+        <table>
+            <tr>
+                <th>#</th>
+                <th>商品名称</th>
+                <th>商品价格</th>
+                <th>操作</th>
+            </tr>
+            <tr v-for="(goods,index) in goodslist2" v-on:click.capture="select(index,$event)">
+                <th>
+                    <input type="checkbox" name="" value="">
+                </th>
+                <th>{{goods.name}}</th>
+                <th>{{goods.price}}</th>
+                <th>
+                    <button @click="deleteGoods(index)">删除</button>
+                </th>
+            </tr>
+            <tr>
+                    <th>总价</th>
+                    <th></th>
+                    <th>商品价格</th>
+                    <th>
+                        <button v-on:click="deleteSelect()">删除选中</button>
+                    </th>
+                </tr>
+        </table>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                name:"",
+                searchName:"",
+                price:"",
+                goodslist:[
+                    {
+                        name:"衣服",
+                        price:12
+                    },
+                    {
+                        name:"裤子",
+                        price:25
+                    },
+                    {
+                        name:"鞋子",
+                        price:45
+                    },
+                    {
+                        name:"帽子",
+                        price:20
+                    }
+                ],
+                goodslist2:[
+                {
+                        name:"衣服",
+                        price:12
+                    },
+                    {
+                        name:"裤子",
+                        price:25
+                    },
+                    {
+                        name:"鞋子",
+                        price:45
+                    },
+                    {
+                        name:"帽子",
+                        price:20
+                    }
+                ]
+            },
+            methods:{
+                addGoods(){
+                    this.goodslist.push({name:this.name,price:this.price})
+                },
+                deleteGoods(index){
+                    this.goodslist.splice(index,1)
+                },
+                search(){
+                    this.goodslist2=[...this.goodslist];
+                    if(this.searchName!=""){
+                        for(let i=0;i<this.goodslist2.length;i++){
+                            if(this.goodslist2[i].name.indexOf(this.searchName)==-1){
+                                this.goodslist2.splice(i,1);
+                                i--;
+                            }
+                        }
+                    }
+                    else{
+                        this.goodslist2=this.goodslist;
+                    }
+
+                },
+                select(index,e){
+                    // console.log(e.target);
+                    
+                },
+                deleteSelect(){
+
+                }
+            }
+        })
+    </script>
+</body>
+</html>
