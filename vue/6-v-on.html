@@ -20,9 +20,10 @@
     </style>
 </head>
 <body>
-    <div id="div1" v-on:click="div1Click('div1')">
+    <div id="div1" v-on:click.once="div1Click('div1',$event)">
         <div id="div2" v-on:click.stop="div1Click('div2')"></div>
         <a href="http://www.baidu.com" v-on:click.prevent="aClick">百度</a>
+        <input type="text" v-on:keyup.13="inputEvent">
     </div>
     
     <script>
@@ -32,12 +33,15 @@
 
             },
             methods:{
-                div1Click(info){
+                div1Click(info,e){
                     console.log(info);
-                    
+                    console.log(e);
                 },
                 aClick(){
                     console.log("百度");
+                },
+                inputEvent(){
+                    console.log("input");
                     
                 }
             }
