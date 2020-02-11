@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+            <ul>
+                <li v-for="(val,key) in arr">{{val}}--{{key}}</li>
+            </ul>
+            <ul>
+                <li v-for="(val,name,index) in obj">{{val}}--{{name}}--{{index}}</li>
+            </ul>
+            <ul>
+                    <li v-for="val in str">{{val}}</li>
+            </ul>
+            <ul>
+                    <li v-for="goods in goodslist">{{goods.name}}--{{goods.price}}--{{goods.num}}</li>
+            </ul>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                arr:[1,2,3,4,5,6],
+                str:"hello",
+                goodslist: [
+                    {
+                        name:"衣服",
+                        price:200,
+                        num:300
+
+                    },
+                    {
+                        name:"裤子",
+                        price:100,
+                        num:100
+                    },
+                    {
+                        name:"鞋",
+                        price:400,
+                        num:400
+                    },
+                    
+                ],
+                obj:{
+                    name:"a",
+                    age:20,
+                    school:"林大"
+                }
+            }
+        })
+    </script>
+</body>
+</html>

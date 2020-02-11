@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+    <style>
+        #div1{
+            width: 400px;
+            height: 400px;
+            background-color: red;
+        }
+        #div2{
+            width: 200px;
+            height: 200px;
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1" v-on:click="div1Click('div1')">
+        <div id="div2" v-on:click.stop="div1Click('div2')"></div>
+        <a href="http://www.baidu.com" v-on:click.prevent="aClick">百度</a>
+    </div>
+    
+    <script>
+        new Vue({
+            el:"#div1",
+            data:{
+
+            },
+            methods:{
+                div1Click(info){
+                    console.log(info);
+                    
+                },
+                aClick(){
+                    console.log("百度");
+                    
+                }
+            }
+            
+
+        })
+    </script>
+</body>
+</html>
