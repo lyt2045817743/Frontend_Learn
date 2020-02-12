@@ -62,7 +62,7 @@
                 <tbody>
                     <tr v-for="(goods,index) in goodslist" v-show="goods.isshow">
                         <th scope="row">
-                          <input type="checkbox" name="goods">
+                          <input type="checkbox" name="goods" :value="goods.name" v-model="selectArr">
                         </th>
                         <td>{{goods.name}}</td>
                         <td>{{goods.price}}</td>
@@ -70,8 +70,8 @@
                     </tr>
                     <tr>
                         <td colspan="2">总价</td>
-                        <td > 0</td>
-                        <td><button type="button" class="btn btn-primary btn-xs">删除选中</button></td>
+                        <td> {{sumPrice}}</td>
+                        <td><button type="button" class="btn btn-primary btn-xs" @click="deleteSelect">删除选中</button></td>
                     </tr>
                 </tbody>
             </table>
@@ -86,6 +86,8 @@
                 searchname:"",
                 goodsname:"",
                 goodsprice:"",
+                selectArr:[],
+                sumPrice:(),
                 goodslist:[
                     {
                         id:1,
@@ -142,7 +144,18 @@
                 },
                 deleteGoods(index){
                     this.goodslist.splice(index,1);
-                }
+                },
+                deleteSelect(){
+                    for(var val of this.selectArr){
+                        for(var goods of this.goodslist){
+                            let index=goods.name.indexOf(val);
+                            if(index!=-1) {
+                                this.goodslist.splice(index,1)
+                            }
+                        }
+                    }
+                },
+
             }
         })
     </script>
