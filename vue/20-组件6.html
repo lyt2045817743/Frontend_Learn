@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- <com1 :com1num="num" @click.native="outCom1"></com1> -->
+        <div :is="witchcom" :com1num="num"></div>
+    </div>
+    <template id="com1">
+        <div>hello{{com1num}}</div>
+    </template>
+    <template id="com2">
+        <div>world</div>
+    </template>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                num:123,
+                witchcom:"com2"
+            },
+            components:{
+                com1:{
+                    template:"#com1",
+                    props:['com1num'],
+                    
+                },
+                com2:{
+                    template:"#com2"
+                }
+            },
+            methods:{
+                outCom1(){
+                    console.log("com1");
+                    
+                }
+            }
+        })
+    </script>
+</body>
+</html>
