@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div v-fellow="test2">hello</div>
+    </div>
+    <script>
+        //自定义指令必须定义在vue对象的前面
+        Vue.directive("fellow",{
+            inserted(el,binding,vnode){
+                console.log(el,binding,vnode);
+                el.style.color=binding.value;
+            }
+        })
+        new Vue({
+            el:"#app",
+            data:{
+                test1:"blue",
+                test2:"red"
+            }
+        })
+    </script>
+</body>
+</html>

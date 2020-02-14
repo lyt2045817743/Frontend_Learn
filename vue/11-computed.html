@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <button @click="addNum">add</button>
+        <p>{{num1}}</p>
+        <p>{{num2}}</p>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                num1:0
+            },
+            methods:{
+                addNum(){
+                    this.num1++;
+                }
+            },
+            computed:{
+                num2(){
+                    return this.num1+1;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

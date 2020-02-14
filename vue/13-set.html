@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <ul v-for="num in arr">
+            <li>{{num}}</li>
+        </ul>
+        <button @click="change1(1)">change1</button>
+        <ul v-for="val in obj">
+            <li>{{val}}</li>
+        </ul>
+        <button @click="change2">change2</button>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                arr:[1,2,3,4,5],
+                obj:{
+                    name:"小明",
+                    age:20,
+                    school:"林大"
+                }
+            },
+            methods:{
+                change1(index){
+                    // this.arr[index]="a"; //html上的值不会改变，arr中的值会改变
+                    // console.log(this.arr);
+                    Vue.set(this.arr,index,"a");
+
+                    // this.arr.splice(index,1)  //删除html上数值会被删掉
+                },
+                change2(){
+                    //对象与数组次相反
+                    // this.obj.name="小刚";//html上的值会改变，obj中的值会改变
+
+                    // this.obj.sex="男";
+                    // console.log(this.obj); //html上的属性不会增加，obj中的属性会增加
+                    Vue.set(this.obj,"sex","男");
+
+                }
+            }
+        })
+    </script>
+</body>
+</html>

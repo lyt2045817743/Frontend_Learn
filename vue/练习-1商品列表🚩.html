@@ -60,9 +60,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(goods,index) in goodslist" v-show="goods.isshow">
+                    <tr v-for="(goods,index) in goodslist" v-show="goods.isshow" @click.stop="checkLines(index)" :class="{active:goods.isCheck}">
                         <th scope="row">
-                          <input type="checkbox" name="goods" :value="goods.name" v-model="selectArr">
+                          <input type="checkbox" name="goods" :checked="goods.isCheck">
                         </th>
                         <td>{{goods.name}}</td>
                         <td>{{goods.price}}</td>
@@ -86,32 +86,34 @@
                 searchname:"",
                 goodsname:"",
                 goodsprice:"",
-                selectArr:[],
-                sumPrice:(),
                 goodslist:[
                     {
                         id:1,
                         name:"衣服",
                         price:12,
-                        isshow:true
+                        isshow:true,
+                        isCheck:false
                     },
                     {
                         id:2,
                         name:"裤子",
                         price:25,
-                        isshow:true
+                        isshow:true,
+                        isCheck:false
                     },
                     {
                         id:3,
                         name:"鞋子",
                         price:45,
-                        isshow:true
+                        isshow:true,
+                        isCheck:false
                     },
                     {
                         id:4,
                         name:"帽子",
                         price:20,
-                        isshow:true
+                        isshow:true,
+                        isCheck:false
                     }
                 ]
             },
@@ -121,7 +123,8 @@
                         id:++this.nowId,
                         name:this.goodsname,
                         price:this.goodsprice,
-                        isshow:true
+                        isshow:true,
+                        isCheck:false
                     }
                     this.goodslist.push(goodsobj)
                 },
@@ -146,16 +149,35 @@
                     this.goodslist.splice(index,1);
                 },
                 deleteSelect(){
-                    for(var val of this.selectArr){
-                        for(var goods of this.goodslist){
-                            let index=goods.name.indexOf(val);
-                            if(index!=-1) {
-                                this.goodslist.splice(index,1)
+                        for(var [key,goods] of this.goodslist.entries()){
+                            if(goods.isCheck) {
+                                this.goodslist.splice(key,1);
                             }
                         }
-                    }
+                        // let newArr =[]
+                        // newArr = this.goodslist.filter(function(goods){
+                        //     if(!goods.isCheck){
+                        //         return goods;
+                        //     }
+                        // })
+                        // this.goodslist = newArr;
                 },
+                checkLines(index){
+                    this.goodslist[index].isCheck=!this.goodslist[index].isCheck;
+                    console.log(this.goodslist[index].isCheck);
+                }
 
+            },
+            computed:{
+                sumPrice(){
+                    var sum=0;
+                        for(var goods of this.goodslist){
+                            if(goods.isCheck==true){
+                                sum+=goods.price;
+                            }
+                        }
+                    return sum;
+                }
             }
         })
     </script>
