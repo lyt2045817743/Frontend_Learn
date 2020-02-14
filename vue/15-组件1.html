@@ -9,11 +9,40 @@
 </head>
 <body>
     <div id="app">
-        
+        <fellow-test></fellow-test>
+        <com1></com1>
     </div>
+    <div id="app2">
+        <fellow-test></fellow-test>
+    </div>
+
     <script>
+        //尽管是全局的组件，也必须嵌套在挂载点里
+        Vue.component("fellowTest",{
+            template:`
+                <h1>hello</h1>
+            `
+        })
         new Vue({
             el:"#app",
+            data:{
+
+            },
+            //只有在挂载点app下可以使用
+            components:{
+                com1:{
+                    //template里只能有一个根元素
+                    template:`
+                    <div>
+                        <h1>world</h1>
+                        <h2></h2>
+                    </div>
+                    `
+                }
+            }
+        })
+        new Vue({
+            el:"#app2",
             data:{
 
             }

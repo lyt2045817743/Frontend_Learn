@@ -9,13 +9,29 @@
 </head>
 <body>
     <div id="app">
-        
+        <com1 :username.sync="name"></com1>
     </div>
     <script>
         new Vue({
             el:"#app",
             data:{
-
+                name:"小明"
+            },
+            components:{
+                com1:{
+                    props:['username'],
+                    template:`
+                    <div>
+                        <h1>我的名字是：{{username}}</h1>
+                        <button @click="changeName">changeName</button>
+                    </div>
+                    `,
+                    methods:{
+                        changeName(){
+                            this.$emit('update:username',"小张");
+                        }
+                    }
+                }
             }
         })
     </script>

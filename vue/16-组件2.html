@@ -9,13 +9,36 @@
 </head>
 <body>
     <div id="app">
-        
+        <com1 :username="name" @testname="parentMethod"></com1>
     </div>
     <script>
         new Vue({
             el:"#app",
             data:{
-
+                name:"小明"
+            },
+            components:{
+                com1:{
+                    props:['username'],
+                    template:`
+                        <div>
+                            <h1>我的名字是：{{username}}</h1>
+                            <button @click="changeName">changeName</button>
+                        </div>
+                    `,
+                    methods:{
+                        changeName(){
+                            this.$emit("testname","小张");
+                            // console.log(this.username);
+                            // this.username = "小张"  //会报错，子组件不可以改父组件的data里的内容
+                        }
+                    }
+                }
+            },
+            methods:{
+                parentMethod(str){
+                    this.name=str;
+                }
             }
         })
     </script>
