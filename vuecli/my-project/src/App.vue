@@ -4,7 +4,10 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
       <router-link to="/mypage">MyPage</router-link> |
-      <router-link to="/parentpage">ParentPage</router-link>
+      <router-link to="/parentpage">ParentPage</router-link> | 
+      <router-link to="/home">回首页</router-link> | 
+      <router-link to="gochild1/小明">gochild1</router-link> | 
+      <router-link to="/test1">起别名</router-link>
     </div>
     <router-view/>
   </div>

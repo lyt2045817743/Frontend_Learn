@@ -12,6 +12,18 @@ export default {
         }
     },
     
+    beforeRouteEnter (to, from, next) {
+      console.log("进来之前");
+      next()
+    },
+    beforeRouteLeave (to, from, next) {
+      console.log("离开之前");
+      next()
+    },
+    beforeUpdate(to,from,next) {
+        console.log("路由修改");
+        next()
+    },
 }
 </script>
 <style scoped>

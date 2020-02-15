@@ -18,7 +18,12 @@ const routes = [
   {
     path: '/mypage',
     name: 'MyPage',
-    component: () => import('../views/MyPage.vue')
+    component: () => import('../views/MyPage.vue'),
+    alias:"/test1",
+    beforeEnter: (to, from, next) => {
+      console.log(to,from);
+      next()
+    }
   },
   {
     path: '/parentpage',
@@ -36,11 +41,23 @@ const routes = [
         component: () => import('../views/test_page/ChildPage2.vue') 
       }
     ]
+  },
+  {
+    path: '/home',
+    redirect:'/'
+  },
+  {
+    path: '/gochild1/:username',
+    redirect:'/parentpage/child1/:username'
+  },
+  {
+    path: '*',
+    component:()=>import('../views/Error.vue')
   }
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: 'hash',
   base: process.env.BASE_URL,
   routes
 })
