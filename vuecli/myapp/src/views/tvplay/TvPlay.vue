@@ -2,7 +2,7 @@
 <template>
 <div>
     <ul class="tv-show">
-        <li class="clearfix" v-for="items in dataList" :key="items.id">
+        <li class="clearfix" v-for="items in dataList" :key="items.id" @click="goDetail(items.id)">
             <div class="left">
                 <img :src="items.cover.url" alt="">
             </div>
@@ -21,7 +21,9 @@ export default {
 data() {
 return {
     dataList:[],
-    start:0
+    start:0,
+    isContinue:true,
+    total:1
 }
 },
 methods: {
@@ -32,7 +34,7 @@ methods: {
             var scrollHeight=doc.scrollHeight;
             var clientHeight=doc.clientHeight;
             var scrollTop=doc.scrollTop;
-            if(scrollTop+clientHeight>=scrollHeight){
+            if(scrollTop+clientHeight+10>=scrollHeight){
                 this.getData();
             }
         }
@@ -45,12 +47,21 @@ methods: {
       let requestUrl =
         `https://m.douban.com/rexxar/api/v2/subject_collection/tv_domestic/items?start=${this.start}&count=10`;
       let birdUrl = "https://bird.ioliu.cn/v2?url="
-      axios
+      if(this.isContinue && this.total>this.start){
+        this.isContinue=false;
+        axios
         .get(birdUrl+requestUrl)
         .then((res) => {
             this.dataList=[...(this.dataList),...(res.data.subject_collection_items)];
             this.start+=10;
+            this.isContinue=true;
+            this.total=res.data.total;
         })
+      }
+      
+    },
+    goDetail(id){
+        this.$router.push('./detail/'+id);
     }
 },
 //生命周期 - 创建完成（访问当前this实例）

@@ -11,9 +11,9 @@ const routes = [
     component: TvPlay
   },
   {
-    path: '/about',
-    name: 'About',
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/detail/:id',
+    name: 'TvDetail',
+    component: () => import('../views/tvplay/TvDetail.vue')
   },
   
   {
