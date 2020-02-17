@@ -20,6 +20,11 @@ export default {
     margin: 0;
     padding: 0;
   }
+  .clearfix::after{
+    content: "";
+    display: block;
+    clear: both;
+  }
   li{
     list-style: none;
   }
