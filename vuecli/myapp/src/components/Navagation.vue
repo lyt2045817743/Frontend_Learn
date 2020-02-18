@@ -77,6 +77,7 @@ mounted() {
         color: #333;
         position: fixed;
         width: 100%;
+        z-index: 9999;
     }
     nav ul{
         display: flex;

@@ -5,6 +5,8 @@
         <li class="clearfix" v-for="items in dataList" :key="items.id" @click="goDetail(items.id)">
             <div class="left">
                 <img :src="items.cover.url" alt="">
+                <!-- 防止防盗链产生的403错误 -->
+                <!-- <img :src="'https://images.weserv.nl/?url='+item.cover.url" /> -->
             </div>
             <div class="right">
                 <p class="title">{{items.title}}</p>
