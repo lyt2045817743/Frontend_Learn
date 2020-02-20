@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // var foo = function () {
+        //     console.log("hello");
+        //     return 123;//将返回值赋值给foo,没有返回值，foo就为undefined
+        // }.call();
+        // console.log(foo);//输出123
+
+        // Function.prototype.bind2=function(){
+        //     return Function.call;
+        // };
+        // console.log(String.prototype);
+
+        function add(c, d) {
+            return this.a + this.b + c + d;
+        }
+        /*
+          在此补全代码 以两种以上方法实现
+        */
+        //第一种方法
+        // var obj = {
+        //     a: 1,
+        //     b: 2
+        // }
+        // console.log(add.call(obj, 3, 4));
+        //第二种方法
+        var a = 1;
+        var b = 2;
+        console.log(add.call(window, 3, 4));
+
+
+    </script>
+</body>
+
+</html>

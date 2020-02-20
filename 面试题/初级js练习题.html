@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //第五题  123000  --->  321
+            //方法一  my 用除余
+            // var str1=123000;
+            // var str2=0;
+            // for(str1=str1/1000,wei=100;str1!=0; wei/=10,str1=Math.floor(str1/10)){
+            //     var n=str1%10;
+            //     str2=n*wei+str2;
+            // }
+            // console.log(str2);
+
+            //方法二 ：先转换成数组，再利用数组的翻转
+            // var str1=123000;
+            // var str2=str1.toString().split("").reverse().join("");   //123000->'123000'->[1][2][3][0][0][0]->[0][0][0][3][2][1]->'000321'
+            // console.log(parseInt(str2));
+            
+            
+        //字节跳动--闭包问题  ：console.log(sum(2)(3))  -->  5   console.log(sum(2,3)) -->  5
+            // function sum(){
+            //     if(arguments.length==2){
+            //         return arguments[0]+arguments[1];
+            //     }
+            //     else{
+            //         var a=arguments[0];
+            //         function foo2(){
+            //             var b=arguments[0];
+            //             return a+b;
+            //         }
+            //         return foo2;
+            //     }
+                
+            // }
+            // console.log(sum(2,3))//5
+            // console.log(sum(2)(3))//5
+
+
+        //第九题：
+        //const repeatfunc=repeat(console.log,5,500);
+        //repeatfunc("hello world");
+       
+            
+            function repeat(){
+                var fun=arguments[0];
+                var n=arguments[1];
+                var time=arguments[2];
+                var count=0;
+                function repeatfunc(str){
+                    timer=setInterval(function(){
+                        if(count==5){
+                            clearInterval(timer);
+                        }
+                        else{
+                            fun(str);
+                            count++;
+                        }
+                    },time)
+                }
+                return repeatfunc;
+            }
+            const repeatfunc=repeat(console.log,5,500);
+            repeatfunc("hello world");
+
+    </script>
+</body>
+</html>

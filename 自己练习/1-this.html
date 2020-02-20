@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // var a=10;
+        // function foo(){
+        //     console.log(a);
+        //     var a=20;//控制台输出undefined   ->  (把对变量的定义提升到当前作用域的最顶端，但变量赋值的部分不提升)
+        // }
+        // foo();
+
+        // var a;
+        // function a(){
+        //     a=10;
+        //     console.log(a)
+        // }
+        // a();
+        // a();//再次调用a()时出错，函数体里已经把a改成了整型10，不再是函数
+
+        // var name="aaaa";
+        // var obj={
+        //     name:"bbbb",
+        //     showName:function(){
+        //         var _this=this;
+        //             return function(){
+        //             name="bbbb";
+        //             console.log(this.name);
+        //         }
+        //     }
+        // }
+        // obj.showName()();//可以写成(function(){})()立即执行函数，立即执行函数的this代表window
+        // //console.log(name);
+
+        
+        function foo(){
+           var foo2=function(){
+                console.log("hello");
+            }
+            return foo2();
+        }
+        foo();
+        //foo2();//这是一条错误的代码！！！！！！！！！！！！！
+
+        // var a=20;
+        // function foo(){
+        //     window.a=10;
+        // }
+        // console.log(a);//20
+        
+    </script>
+</body>
+</html>
