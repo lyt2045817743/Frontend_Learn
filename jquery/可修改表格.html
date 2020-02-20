@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./js/jquery-3.4.1.js"></script>
+    <style type="text/css">
+        body {
+            font-size: 16px;
+        }
+
+        table {
+            border: 1px solid black;
+            border-collapse: collapse;
+            width: 400px;
+        }
+
+        table td,
+        th {
+            width: 50%;
+            border: 1px solid black;
+            height: 30px;
+        }
+
+        tbody th {
+            background-color: #abc;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th colspan="2"> 鼠标点击表格就可以编辑</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>学号</th>
+                <th>姓名</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td class="editable">张三</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td class="editable">李四</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td class="editable">王五</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td class="editable">赵六</td>
+            </tr>
+        </tbody>
+    </table>
+    <script>
+        //添加editable的鼠标点击事件，将文本变成输入框进行编辑
+            $(".editable").on("click", function () {
+                //判断是否有输入框（防止第二次触发鼠标点击事件时输入框里没有文本的值）
+                if ($(this).children().length < 1) {
+                    //console.log($("editable:innerText"));
+                    var p = $(this).text();
+                    //console.log(p);
+                    $(this).html("<input class='inp' type='text' value=" + p + "></input>");
+                    $(".inp").focus();
+
+                }
+            }) 
+        //失去焦点变回文本
+            //方法一：表格没有焦点聚焦和失去焦点
+            // $(".editable").on("blur","input",function () {
+            //     console.log(this);
+            //     var text = $(".inp").val();
+            //     //console.log(text);
+            //     $(this).replaceWith(text)
+            // })
+
+            //方法二：用focusout（可以对失去焦点事件进行冒泡）冒泡到editable
+            $(".editable").on("focusout",function(){
+                var text=$(this).find(":input").val();
+                $(this).text(text);
+                //$(this).find(":input").replaceWith(text);
+            })
+
+        //键盘事件敲击回车变回文本
+            $(".editable").on("keydown",function(e){
+                if(e.keyCode==13){
+                    $(this).trigger("focusout");
+                }
+            })
+    </script>
+</body>
+
+</html>

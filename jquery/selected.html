@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./js/jquery-3.4.1.js"></script>
+    <style>
+        select {
+            width: 150px;
+            height: 200px;
+        }
+
+        span {
+            background-color: gray;
+            color: aliceblue;
+            width: 150px;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
+        #div {
+            float: left;
+            text-align: center;
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="div">
+        <select multiple id="sel1">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+        </select><br />
+        <span id="add">选中添加到右边>></span><br />
+        <span id="add_all">全部添加到右边>></span>
+    </div>
+    <div id="div">
+        <select multiple id="sel2">
+            <option>8</option>
+        </select><br />
+        <span id="remove">&lt;&lt;选中添加到左边</span><br />
+        <span id="remove_all">&lt;&lt;全部添加到左边</span>
+    </div>
+    <script>
+        //左边复选框--双击事件
+        // $("#sel1").dblclick(function (e) {
+        //     $("#sel2").prepend($(e.target));
+        //     $("#sel1").remove($(e.target));
+
+        // })
+        //方法二：
+        $("#sel1").on("dblclick","option",function(){
+            $(this).appendTo($("#sel2"));
+        })
+
+
+        //右边复选框--双击事件
+        $("#sel2").dblclick(function (e) {
+            $("#sel1").prepend($(e.target));
+            $("#sel2").remove($(e.target));
+        })
+
+        //左边复选框--选中移动
+        $("#add").click(function () {
+            $("#sel1 option:selected").appendTo($("#sel2"))
+        })
+
+        //右边复选框--选中移动
+        $("#remove").click(function () {
+            $("#sel2 option:selected").appendTo($("#sel1"))
+        })
+
+        //左边复选框--全部移动
+        $("#add_all").click(function(){
+            $("#sel1 option").appendTo($("#sel2"))
+        })
+
+        //右边复选框--全部移动
+        $("#remove_all").click(function(){
+            $("#sel2 option").appendTo($("#sel1"))
+        })
+    </script>
+</body>
+
+</html>
