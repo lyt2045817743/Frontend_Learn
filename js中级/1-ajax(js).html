@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 200px;
+            height: 20px;
+        }
+
+        #inp {
+            float: left;
+        }
+
+        #span {
+            display: none;
+            /*输入前不显示标签*/
+            float: right;
+        }
+
+        .active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <input id="inp" type="text" name="inp">
+        <span></span>
+    </div>
+
+    <script>
+        //不足：如果
+        var oInp = document.getElementById("inp");
+        var oSpan = document.getElementsByTagName("span")[0];
+        var timer;
+
+        //通过“输入框聚焦时”->触发定时函数（用定时函数两秒发送一个请求）
+        //不足：如果用户没有失去焦点也没有更改输入框的内容，会有许多没必要的请求发送
+        oInp.onfocus = function () {
+            timer=setInterval(function () {
+                //请求对象初始化
+                var xmlHttp = new XMLHttpRequest();
+                xmlHttp.open("get", "https://api.myjson.com/bins/l8pz0", true);
+                xmlHttp.send();
+                xmlHttp.onreadystatechange = function () {
+                    if (xmlHttp.status == 200 && xmlHttp.readyState == 4) {
+
+                        //得到返回结果
+                        var nameList = JSON.parse(xmlHttp.responseText);
+                        console.log(nameList);
+
+                        //将输入的名字与返回结果的名字数组进行比对
+                        for (var i = 0; i < nameList.name.length; i++) {
+                            //console.log(inp.value);
+                            //如果重复，则显示×
+                            if (inp.value == nameList.name[i] && inp.value != "") {
+                                oSpan.className = "active";
+                                oSpan.innerText = "×";
+                                break;
+                            }
+                        }
+                        //如果遍历之后没有重复的名字，则显示√
+                        if (i == nameList.name.length) {
+                            oSpan.className = "active";
+                            oSpan.innerText = "√";
+                        }
+                    }
+                }
+            }, 2000)
+        }
+
+        //“失去焦点时”->释放定时
+        oInp.onblur=function(){
+            clearInterval(timer);
+        }
+    </script>
+</body>
+
+</html>
