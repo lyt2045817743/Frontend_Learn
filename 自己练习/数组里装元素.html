@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./js/react.development.js"></script>
+    <script src="./js/react-dom.development.js"></script>
+    <script src="./js/babel.min.js"></script>
+</head>
+<body>
+    <div id="app">
+
+    </div>
+    <script type="text/babel">
+        let arr=[];
+        arr.push(<h1>hello</h1>);
+        arr.push(<h1>fellow 37</h1>);
+        var aDiv=document.getElementById('app');
+        // aDiv.innerHTML=arr;  原生javasript不能用数组直接装HTML元素
+
+        class ArrList extends React.Component{
+            constructor(props){
+                super(props)
+
+            }
+            render(){
+                let arr=[];
+                arr.push(<h1>hello</h1>);
+                arr.push(<h1>fellow 37</h1>);
+                return arr;//JSX能用数组直接装HTML元素
+            }
+        }
+
+        ReactDOM.render(
+            <ArrList/>,
+            document.getElementById('app')
+        )
+    </script>
+</body>
+</html>

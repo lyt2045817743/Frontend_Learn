@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="./js/react.development.js"></script>
+  <script src="./js/react-dom.development.js"></script>
+  <script src="./js/babel.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <style>
+    .container{
+      padding-top: 50px;
+    }
+    .active{
+      background-color: gray;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    
+   
+  </div>
+  <script type="text/babel">
+    class ToDoList extends React.Component{
+      constructor(props){
+        super(props)
+        this.state={
+
+        }
+      }
+      render(){
+        return(
+          <div className="form-bar container">
+          <form className="form-inline">
+            <input name="info" type="text" className="form-control mb-2 mr-sm-2" placeholder="待办事项" />
+            <input name="time" type="date" className="form-control mb-2 mr-sm-2" />
+            <div className="input-group mb-2 mr-sm-2">
+              <input name="count" type="text" className="form-control" placeholder="待代办时间" />
+            </div>
+            <button type="button" className="btn btn-primary mb-2">Submit</button>
+          </form>
+          <ToDoTable/>
+        </div>
+        )
+      }
+    }
+
+    class ToDoTable extends React.Component{
+      constructor(props){
+        super(props)
+        this.state={
+          isActive:[],
+          dataList:[
+            {
+              id:1001,
+              info:"学习",
+              date:"2020-02-23",
+              count:2,
+              isCheck:false
+            },
+            {
+              id:1002,
+              info:"游戏",
+              date:"2020-02-23",
+              count:1,
+              isCheck:false
+            },
+            {
+              id:1003,
+              info:"睡觉",
+              date:"2020-02-22",
+              count:8,
+              isCheck:false
+            },
+            {
+              id:1004,
+              info:"吃饭",
+              date:"2020-02-23",
+              count:1,
+              isCheck:false
+            }
+          ]
+        }
+        this.addActive=this.addActive.bind(this)
+      }
+      addActive(index){
+        let arr=this.state.dataList;
+        arr[index].isCheck=!(arr[index].isCheck);
+        // console.log(arr);
+        
+        this.setState={
+          dataList:arr
+        }
+        this.state.isActive[index]=(this.state.dataList[index].isCheck)?"active":"";
+
+        ReactDOM.render(
+          <ToDoList/>,
+          document.getElementById('app')
+        )
+        
+      }
+      render(){
+        let arr=[];
+        for(var i=0;i<this.state.dataList.length;i++){
+          // console.log(this.state.isActive[i]);
+          var isActive=this.state.isActive[i];
+          console.log(isActive); //
+          
+          arr.push(<tr key={i} onClick={this.addActive.bind(null,i)} className={isActive}>
+                <th scope="row">
+                   <input type="checkbox" readOnly/>
+                </th>
+                <td>{this.state.dataList[i].info}</td>
+                <td>{this.state.dataList[i].date}</td>
+                <td>{this.state.dataList[i].count}</td>
+                <td>
+                   <button type="button" className="btn btn-primary btn-sm">删除</button>
+                </td>
+              </tr>)
+        }
+        
+        return (
+          <div className="table-bar">
+            <table className="table">
+            <thead className="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">代办事项</th>
+                    <th scope="col">代办时间</th>
+                    <th scope="col">预计用时</th>
+                    <th scope="col">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+              {arr}
+              <tr>
+                  <td><button type="button" className="btn btn-primary btn-sm">删除选中</button></td>
+                  <td colSpan="4">0</td>
+              </tr>
+            </tbody>
+            </table>
+          </div>
+        )
+      }
+    }
+
+    ReactDOM.render(
+      <ToDoList/>,
+      document.getElementById('app')
+    )
+  </script>
+</body>
+
+</html>
