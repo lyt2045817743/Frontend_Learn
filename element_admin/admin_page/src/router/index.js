@@ -37,11 +37,7 @@ export const constantRoutes = [
     hidden: true
   },
 
-  {
-    path: '/404',
-    component: () => import('@/views/404'),
-    hidden: true
-  },
+ 
 
   {
     path: '/',
@@ -157,6 +153,33 @@ export const constantRoutes = [
         meta: { title: 'External Link', icon: 'link' }
       }
     ]
+  },
+  {
+    path: '/student',
+    component: Layout,
+    redirect: '/student/list',
+    name: 'student',
+    meta: { title: '学生管理', icon: 'example' },
+    children: [
+      {
+        path: 'list',
+        name: 'list',
+        component: () => import('@/views/student/list'),
+        meta: { title: '学生列表', icon: 'table' }
+      },
+      {
+        path: 'add',
+        name: 'add',
+        component: () => import('@/views/student/add'),
+        meta: { title: '添加学生', icon: 'tree' }
+      }
+    ]
+  },
+
+  {
+    path: '/404',
+    component: () => import('@/views/404'),
+    hidden: true
   },
 
   // 404 page must be placed at the end !!!
