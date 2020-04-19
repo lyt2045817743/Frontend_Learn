@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <div id="nav">
+      <!-- <Menu /> -->
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
       <router-link to="/mypage">MyPage</router-link> |
@@ -19,13 +20,17 @@
 </template>
 
 <script>
+// import Menu from './components/Menu.vue'
 export default {
-  el:"#app",
+  // el:"#app",
   methods: {
     go(){
       this.$router.push('/')
     }
   },
+  components:{
+    // Menu
+  }
 }
 </script>
 

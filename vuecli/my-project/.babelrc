@@ -1,0 +1,7 @@
+//此文件为练习view ui加
+{
+    "plugins": [["import", {
+      "libraryName": "view-design",
+      "libraryDirectory": "src/components"
+    }]]
+}
