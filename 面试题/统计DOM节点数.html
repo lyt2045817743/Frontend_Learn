@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <div>
+            <span>
+
+            </span>
+        </div>
+    </div>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+    <script>
+        var htmlTag=document.getElementsByTagName("html")[0];
+        var tagNumTotal={};
+
+        //非递归
+        function total(tag){
+            var tagArr=[];//用于存放当前还没有遍历过的节点
+            tagArr.push(tag);
+
+            for(var i=0;i<tagArr.length;i++){
+                var nowTag=tagArr[i];//存放当前节点
+                
+                //将当前节点的数量加1
+                if(tagNumTotal[nowTag.tagName]!==undefined){
+                    tagNumTotal[nowTag.tagName]++;
+                }
+                else{
+                    tagNumTotal[nowTag.tagName]=1;
+                }
+                //遍历当前节点的子节点，将其加入到数组中
+                for(var j=0;j<nowTag.children.length;j++){
+                    tagArr.push(nowTag.children[j]);
+                }
+            }
+        }
+
+        //递归
+        function total2(tag){
+            //将当前节点的数量加一
+            if(tagNumTotal[tag.tagName]!==undefined){
+                tagNumTotal[tag.tagName]++;
+            }
+            else{
+                tagNumTotal[tag.tagName]=1;
+            }
+
+            //遍历当前节点的子节点
+            for(var i=0;i<tag.children.length;i++){
+                total2(tag.children[i]);
+            }
+        }
+
+        // total(htmlTag);//非递归调用
+        total2(htmlTag);//递归函数调用
+        // console.log(htmlTag);
+        
+        console.log(tagNumTotal);
+        
+        
+    </script>
+</body>
+</html>

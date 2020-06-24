@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    .box{
+      /* 不设置宽高却能占满整个屏幕 */
+      position: absolute;
+      top:0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+
+      /* 背景颜色 */
+      /* background-color: rgba(0,0,0,0.1); */
+
+      /* 内部元素、文字也会受到影响 */
+      /* opacity: .1; */
+      
+      color: green;
+      font-size: 100px;
+      text-align: center;
+    }
+    .div1{
+      width: 500px;
+      height: 500px;
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="div1"></div>
+  <div class="box">hello</div>
+</body>
+</html>

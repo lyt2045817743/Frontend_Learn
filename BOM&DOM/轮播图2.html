@@ -47,6 +47,7 @@
       line-height: 20px;
       color: white;
       margin-left: 10px;
+      cursor:pointer;
     }
     #left-btn {
       float: left;
@@ -58,18 +59,22 @@
     #right-btn .active{
       background-color: red;
     }
+    img{
+        width:490px;
+        height:170px;
+    }
   </style>
 </head>
 <body>
     <div class="big-box">
       <div class="imgs">
         <ul>
-          <li><img src="BOM&DOM/images/01.jpg"></li>
-          <li><img src="BOM&DOM/images/02.jpg"></li>
-          <li><img src="BOM&DOM/images/03.jpg"></li>
-          <li><img src="BOM&DOM/images/04.jpg"></li>
-          <li><img src="BOM&DOM/images/05.jpg"></li>
-          <li><img src="BOM&DOM/images/01.jpg"></li>
+            <li class="active"><img src="./images/build.jpg" alt=""></li>
+            <li><img src="./images/flower.jpg" alt=""></li>
+            <li><img src="./images/img1.jpg" alt=""></li>
+            <li><img src="./images/road.jpg" alt=""></li>
+            <li><img src="./images/flower.jpg" alt=""></li>
+            <li class="active"><img src="./images/build.jpg" alt=""></li>
         </ul>
       </div>
       <div id="btn">
