@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    //let
+      // console.log(a);//a is not defined
+
+      //不存在变量提升
+      // console.log(a);//Cannot access 'a' before initialization
+      // let a = 10;
+
+      //let 不能声明已有的变量（1）
+      // let a = 10;
+      // let a = "abc";// Identifier 'a' has already been declared
+
+      // //let 不能声明已有的变量（2）
+      // var a = 10;
+      // let a = "abc";//Identifier 'a' has already been declared
+
+      // let a=10;
+      // a="abd"; //不报错
+
+      
+      //有关块级作用域
+      // if(true){
+      //   var a = 10;
+      // }
+      // console.log(a);//10
+
+      // if(true){
+      //   let a = 10;
+      //   console.log(a);
+      // }
+      // console.log(a);//a is not defined
+
+    //const
+      // //和let一样，不存在变量提升
+      // console.log(a);//Cannot access 'a' before initialization
+      // const a = 10;
+
+      // //const声明的基本类型变量不能修改
+      // const a = 10;
+      // a = 20; //Assignment to constant variable.
+
+      // //const声明的引用类型变量不能修改引用，但可以修改其属性和值
+      // const obj = {
+      //   name:"abc"
+      // }
+      // obj.name="bcd";
+      // // obj = {}
+      // console.log(obj);
+
+      //通过Object.freeze(obj)可以冻结引用类型的引用，不会被修改（不会报错）
+      const obj = {
+        name:"abc"
+      }
+      Object.freeze(obj)
+      obj.name = "bcd";
+      console.log(obj);
+    
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //数组解构赋值
+    //不需要通过索引，就可以将数组中的某一个值赋给一个变量
+    // let [a,b]=["hello","world","fellow"];
+    // console.log(a,b);
+
+    //解构的结构应该和原数组相同
+    // let [a,[b,c],d] = [1,[2,3],4];
+    // console.log(a,b,c,d);
+
+    //对象解构赋值
+    // let obj = {
+    //   name:"abc",
+    //   age:20
+    // }
+    // let {age:b,name:a}=obj;
+    // console.log(a,b);
+
+    //字符串解构赋值
+    // let [a,b,c] = "hello";
+    // console.log(a,b,c);
+
+    //解构赋值解决参数传递
+    // function foo({name,age}){
+    //   console.log(name,age);
+    // }
+    // let obj = {
+    //   name:"abc",
+    //   age:20
+    // }
+    // foo(obj)
+
+    //用解构赋值获取函数返回值
+    // function foo(){
+    //   return {name:"abc",age:20}
+    // }
+    // var {name,age} = foo();
+    // console.log(name,age);
+    
+
+    //交换a和b的值
+    // var a = 1;
+    // var b = 2;
+
+    // 方案一
+    // let temp = 0;
+    // temp = a+b;
+    // a=b;
+    // b=temp-a;
+
+    //方案二
+    // var [a,b]=[b,a];
+
+    //方案三
+    // var a = [b,b=a][0];
+
+    // console.log(a,b);
+    
+
+
+      
+  </script>
+</body>
+</html>
