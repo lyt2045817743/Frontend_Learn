@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    *{
+      margin:0;
+    }
+    .div1{
+      margin-top:30px;
+      height: 400px;
+      width: 400px;
+      background-color: red;
+      /* 方法一 */
+      /* overflow: hidden; */
+      
+      /* 方法三 */
+      /* border: 1px solid #000; */
+
+      /* 方法二（2） */
+      float:left;
+    }
+    .div2{
+      width: 200px;
+      height: 200px;
+      background-color: blue;
+      margin-top:50px;
+      /* 方法二（1） */
+      /* float: left; */
+    }
+  </style>
+</head>
+<body>
+  <!-- BFC  块级格式化上下文-->
+  <div class="div1">
+    <div class="div2"></div>
+  </div>
+</body>
+</html>
