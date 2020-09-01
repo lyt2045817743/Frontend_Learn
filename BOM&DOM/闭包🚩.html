@@ -10,19 +10,58 @@
     <script>
         // var name="window"
         // var count=2;
-        object={
-            name:"my object",
-            count:1,
-            getNameFunc: function(){
-                return this.name;
-            }
-        }
+        // object={
+        //     name:"my object",
+        //     count:1,
+        //     getNameFunc: function(){
+        //         return this.name;
+        //     }
+        // }
         // console.log(object.getNameFunc());
         // console.log(window.name); //啥也不输出也不报错
-        console.log(name);//啥也不输出也不报错
+        // console.log(name);//啥也不输出也不报错
         // console.log(window.count);//undefined
         // console.log(count); //报错count is not defined
         
+
+        // var list = [{age: 1}, {age:13}, {age:8}, {age:13}, {age:8}]
+        // var obj={}
+        // list.forEach(function(val,key){
+        //     if(obj[val.age]!==undefined){
+        //         obj[val.age]++;
+        //     }else{
+        //         obj[val.age]=1;
+        //     }
+        // })
+        // let max=0;
+        // console.log(obj);
+        // for(var val in obj){
+        //     if(obj[val]>max){
+        //         max=obj[val];
+        //     }
+        // }
+        // console.log(max);
+
+        var arr = [10, 4, 55, 1, 21, 34, 111];
+
+        function quickSort(arr){
+            if(arr.length<=1){
+                return arr;
+            }
+            var mid=Math.floor(Math.random()*arr.length);
+            var left=[];
+            var right=[];
+            for(var i=0;i<arr.length;i++){
+                if(arr[i]>=arr[mid]){
+                    right.push(arr[i]);
+                }
+                else{
+                    left.push(arr[i]);
+                }
+            }
+            return quickSort(left).concat(quickSort(right));
+        }
+        console.log(quickSort(arr));
 
     </script>
 </body>
