@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+                
+    .parent{
+        width:100%;
+        height:100%;
+        z-index:100;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        background-color:rgba(1,1,1,0.5);
+    }
+    
+    .modal{
+        positon:relative;
+    }
+    
+    .flash{
+        position:absolute;
+        translate:transformY(100%);
+    }
+    
+    @keyframe foo(){
+        translate:transformY(0);
+    }
+    </style>
+</head>
+<body>
+    <div class="parent">
+        <div class="modal">
+            <div class="flash"></div>
+        </div>
+    <div>
+
+    
+</body>
+</html>
