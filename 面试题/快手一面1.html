@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .pp{
+            position: absolute;
+        }
+        .div1{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            z-index: 5;
+        }
+        .div2{
+            width: 100px;
+            height: 100px;
+            position: relative;
+            top: -50px;
+            z-index: 3;
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <!-- <span>1111</span>
+    <p class="pp">2222</p>
+    <span>3333</span> -->
+    <div class="div1"></div>
+    <div class="div2"></div>
+    <script>
+        // var name="Tom";
+        // (function(){
+        //     if(typeof name==='undefined'){
+        //         // var name="Jack";
+        //         let name="Jack";
+        //         console.log("Goodbye "+name);
+        //     }
+        //     else{
+        //         console.log("Hello "+name);
+        //     }
+        // })()
+
+        // var a={},b='123',c=123;
+        var a={},b=Symbol('123'),c=Symbol(123);
+        a[b]='b';
+        a[c]='c';
+        console.log(a[b]);
+        
+    </script>
+</body>
+</html>
