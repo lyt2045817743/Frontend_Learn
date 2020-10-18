@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function ajax(url, info){
+            return new Promise((reslove,reject)=>{
+                const xhr = new XMLHttpRequest();
+                xhr.open(info.method,url,true);
+                xhr.onreadystatechange = function(res){
+                    if(xhr.readyState === 4){
+                        if(xhr.status === 200){
+                            reslove(JSON.parse(res))
+                        } else if(xhr.status === 404){
+                            reject(new Error('page is not found!'))
+                        }
+                    }
+                }
+                xhr.send(null);
+            })
+        }
+
+        ajax('./data/testAjax.json',{
+            method:'GET'
+        }).then((res)=>{
+            console.log(res);
+        }).catch((err)=>{
+            console.error(err);
+        })    
+    </script>
+</body>
+</html>
