@@ -6,10 +6,11 @@ const bodyParser = require('koa-bodyparser');
 
 const banner = require('./routes/backend/optimiz');
 const { dbUrl } = require('./config/base');
+const MidWareOfErr = require('./config/MidWareOfError');
 
 const app = new Koa();
 app.use(bodyParser());
-
+app.use(MidWareOfErr)
 
 mongoose.connect(dbUrl, {
     useNewUrlParser: true,

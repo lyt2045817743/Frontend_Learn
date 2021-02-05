@@ -1,5 +1,7 @@
 const router = require('koa-router')();
 const UserName = require('../../models/username');
+const InitRes = require('../../config/InitRes');
+const { chRegister } = require('../../config/checkParams');
 
 
 router.post('/register', async ctx => {
@@ -12,12 +14,16 @@ router.post('/register', async ctx => {
         openid
     })
 
+    new chRegister(ctx, name, password).chRegisterFun();
+
     await user.save()
     .then( res => {
-        console.log('成功');
+        console.log('注册成功');
+        new InitRes(ctx, '注册成功').success();
     })
     .catch( err => {
-        console.log('失败');
+        console.log(err);
+        new InitRes(ctx).fail('注册失败', 500);
     })
 
 })
