@@ -3,10 +3,12 @@ class Person {
   protected weight
   private id
   static className = '人'
+  house
 
-  constructor(name: string, weight?: string) {
+  constructor(name: string, weight?: string, house?: House) {
       this.name = name;
-      this.weight = weight
+      this.weight = weight;
+      this.house = house;
   }
   
   getName() {
@@ -39,6 +41,14 @@ class Teacher extends Person {
   }
 }
 
+class House {
+  city: string
+
+  constructor(city) {
+    this.city = city;
+  }
+}
+
 console.log('============= 封装&继承 ================');
 const p = new Student('lyt', '120', 'A1', 'lily');
 console.log(Student.className + '，' + p.getWeight()) // 101，120
@@ -49,3 +59,8 @@ const p2 = new Student('lyt', '120', 'A1', 'lily');
 console.log(p2.getName());
 const t = new Teacher('Miss Li');
 console.log(t.getName());
+
+console.log('============= 类的关联关系 ================');
+const h = new House('北京');
+const p3 = new Person('lyt', '90', h);
+console.log(p3); // Person { name: 'lyt', weight: '90', house: House { city: '北京' } }
