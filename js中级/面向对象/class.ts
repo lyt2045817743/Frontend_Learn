@@ -4,7 +4,7 @@ class Person {
   private id
   static className = '人'
 
-  constructor(name: string, weight: string) {
+  constructor(name: string, weight?: string) {
       this.name = name;
       this.weight = weight
   }
@@ -27,8 +27,25 @@ class Student extends Person {
   getWeight() {
       return this.weight;
   }
+
+  getName() {
+    return this.name + '(student)';
+  }
 }
 
+class Teacher extends Person {
+  constructor(name) {
+    super(name);
+  }
+}
+
+console.log('============= 封装&继承 ================');
 const p = new Student('lyt', '120', 'A1', 'lily');
 console.log(Student.className + '，' + p.getWeight()) // 101，120
 // console.log(p.girl); // 报错 属性“girl”为私有属性，只能在类“Student”中访问。
+
+console.log('============= 多态 ================');
+const p2 = new Student('lyt', '120', 'A1', 'lily');
+console.log(p2.getName());
+const t = new Teacher('Miss Li');
+console.log(t.getName());
