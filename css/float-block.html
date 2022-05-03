@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .float {
+      float: left;
+      background-color: red;
+    }
+    .no-float {
+      background-color: blue;
+    }
+    .no-float .children {
+      /* width: 100px; */
+      height: 100px;
+      width: 500px;
+      background-color: yellow;
+    }
+    .has-width {
+      width: 300px;
+      height: 300px;
+      background-color: aquamarine;
+    }
+  </style>
+</head>
+<body>
+  <div class="no-float">这段文字会跑到浮动区域周围</div>
+  <div class="float">这是一个浮动的段落</div>
+  <div class="no-float">这段文字会跑到浮动区域周围</div>
+  <div class="float">这是一个浮动的段落</div>
+  <div class="float has-width">固定宽度**这段文字会跑到浮动区域周围</div>
+  <div class="no-float">这段文字会跑到浮动区域周围
+    <span class="children">子元素行级</span>
+    <div class="children"></div>
+    <img src="../images/img01.jpg" height="300px" />
+    <span class="children">子元素行级</span>
+  </div>
+  <div class="has-width no-float">固定宽度**这段文字会跑到浮动区域周围</div>
+</body>
+</html>
