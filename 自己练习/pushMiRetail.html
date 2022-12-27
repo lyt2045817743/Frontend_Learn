@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title style="text-align: left">跳转中</title>
+    <style>
+      body {
+        margin: 0;
+      }
+      #img {
+        width: 198px;
+        height: 198px;
+        margin: 100px auto 20px;
+      }
+      #tips {
+        color: #999999;
+        font-size: 13px;
+        margin: 0 auto;
+      }
+      #box {
+        display: flex;
+        flex-direction: column;
+        background-color: #f5f6fa;
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="box">
+      <img
+        id="img"
+        src="https://cdn.cnbj1.fds.api.mi-img.com/retail-qiankun/MiRetail/pushMiRetail.png"
+      />
+      <div id="tips">正在跳转至零售通，请稍后...</div>
+    </div>
+    <script>
+      window.onload = function () {
+        const { search } = window.location;
+        const [_unUse, appUrl] = search.split("appUrl=");
+        setTimeout(() => {
+          if (
+            /Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)
+          ) {
+
+            var last = Date.now(),
+              doc = window.document,
+              ifr = doc.createElement("iframe");
+
+            //创建一个隐藏的iframe
+            ifr.src = appUrl;
+            ifr.style.cssText = "display:none;border:0;width:0;height:0;";
+            doc.body.appendChild(ifr);
+
+            setTimeout(function () {
+              doc.body.removeChild(ifr);
+              //setTimeout回小于2000一般为唤起失败
+              if (Date.now() - last < 1500) {
+                if (typeof onFail == "function") {
+                  onFail();
+                } else {
+                  //弹窗提示或下载处理等
+                  alert("请安装零售通app后操作");
+                }
+              } else {
+                if (typeof onSuccess == "function") {
+                  onSuccess();
+                }
+                window.close();
+              }
+            }, 1000);
+          } else {
+            alert("请前往移动端操作");
+          }
+        }, 500);
+      };
+    </script>
+  </body>
+</html>
