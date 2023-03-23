@@ -138,18 +138,18 @@ const resolvePromise = (promise2, x, resolve, reject) => {
 //     return promise2;
 //   }
 // }
-function testPromise1() {
-  return new Promise((resolve, reject) => {
-    let data = { a: 1 };
-    setTimeout(() => {
-      console.log('promise before resolve');
-      resolve(data);
-      // resolve函数执行后，后面的代码还执行嘛？--执行
-      data.a = 2;
-      console.log(data, 'promise after resolve');
-    }, 10);
-  })
-}
+// function testPromise1() {
+//   return new Promise((resolve, reject) => {
+//     let data = { a: 1 };
+//     setTimeout(() => {
+//       console.log('promise before resolve');
+//       resolve(data);
+//       // resolve函数执行后，后面的代码还执行嘛？--执行
+//       data.a = 2;
+//       console.log(data, 'promise after resolve');
+//     }, 10);
+//   })
+// }
 
 // testPromise1().then((res) => {
 //   console.log(res, 'then');
@@ -158,10 +158,12 @@ function testPromise1() {
 //   console.log(res, 'then twice');
 // })
 
-let logSort = new Promise(function(resolve, reject) {
-  console.log('Promise');
-  resolve();
-});
+
+
+// let logSort = new Promise(function(resolve, reject) {
+//   // console.log('Promise');
+//   resolve();
+// });
 
 // logSort.then(function() {
 //   console.log('resolved.');
@@ -170,13 +172,29 @@ let logSort = new Promise(function(resolve, reject) {
 // console.log('Hi!');
 
 
-let errCatch = new Promise(function(resolve, reject) {
-  resolve(1);
+
+
+// let errCatch = new Promise(function(resolve, reject) {
+//   resolve(1);
+//   a+1;
+// });
+
+// errCatch.then((res) => {
+//   console.log(res);
+// }).catch((e)=>{
+//   console.log(e);
+// })
+
+let errCatch1 = new Promise(function(resolve, reject) {
+  console.log(1);
   a+1;
+  resolve('resolve after error');
 });
 
-errCatch.then((res) => {
+errCatch1.then((res) => {
   console.log(res);
 }).catch((e)=>{
-  console.log(e);
+  console.log('catch', e);
 })
+
+console.log(2);

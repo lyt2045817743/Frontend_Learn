@@ -50,4 +50,8 @@ class Promise {
     }
   }
 }
-exports.modules = Promise;
+
+
+new Promise((resolve) => {
+  resolve(1)
+})

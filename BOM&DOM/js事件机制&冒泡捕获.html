@@ -42,30 +42,29 @@
     box1.onclick = function(){
       console.log("hello");
     }
-    
 
 
 //第三个参数为是否捕获，如果为true就是捕获，如果为false就是冒泡
-    // box1.addEventListener("click",function(){
-    //   console.log("box1")
-    // },true)
-    // box2.addEventListener("click",function(){
-    //   console.log("box2")
-    // },true)
-    // box3.addEventListener("click",function(){
-    //   console.log("box3")
-    // },true)
-    
     box1.addEventListener("click",function(){
       console.log("box1")
-    },false)
+    },true)
     box2.addEventListener("click",function(){
       console.log("box2")
-    },false)
-    box3.addEventListener("click",function(e){
-      console.log("box3");
-      e.stopPropagation();
-    },false)
+    },true)
+    box3.addEventListener("click",function(){
+      console.log("box3")
+    },true)
+    
+    // box1.addEventListener("click",function(){
+    //   console.log("box1")
+    // },false)
+    // box2.addEventListener("click",function(){
+    //   console.log("box2")
+    // },false)
+    // box3.addEventListener("click",function(e){
+    //   console.log("box3");
+    //   e.stopPropagation();
+    // },false)
 
 
   </script>
