@@ -7,7 +7,7 @@
     <title>Document</title>
     <style>
         #can{
-            background-color: black;
+            /* background-color: black; */
         }
     </style>
 </head>
@@ -16,7 +16,15 @@
     <script>
         var  oCan=document.getElementById("can");
         var content=oCan.getContext("2d");
-        content.strokeStyle="#fff";
+        content.strokeStyle="#ff0000";
+
+        // 绘制矩形
+        content.fillRect(10, 10, 50, 50);
+
+        // 绘制文本
+        content.font = '20px Arial';
+        content.fillText('Hello, world!', 10, 80);
+
 
         oCan.onmousedown=function(e){
             content.beginPath();
@@ -24,10 +32,9 @@
             this.onmousemove=function(e){
                 content.lineTo(e.clientX,e.clientY);
                 content.stroke();
-                
             }
             oCan.onmouseup=function(){
-                    oCan.onmousemove=null;
+                oCan.onmousemove=null;
             }
         }
         

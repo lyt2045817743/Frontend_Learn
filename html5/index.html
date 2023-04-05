@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+    }
+    .box2 {
+      width: 100px;
+      height: 100px;
+      background-color: green;
+    }
+  </style>
+</head>
+<body>
+  <div class="box2"></div>
+  <button>点击</button>
+  <!-- <script src="add.js"></script> -->
+  <script>
+    const worker = new Worker('add.js');
+    worker.onmessage = function(event) {
+      console.log('外部收到消息：', event.data);
+    }
+    worker.postMessage('start');
+
+    const body = document.querySelector('body');
+    const div = document.createElement('div');
+    div.className = 'box';
+    body.appendChild(div);
+
+    const btn = document.querySelector('button');
+    btn.onclick = function() {
+      alert('点击了一次');
+    }
+    // longRunningOperation(); // 不使用webWorker
+
+  </script>
+</body>
+</html>
