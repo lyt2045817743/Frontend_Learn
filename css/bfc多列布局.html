@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #container {
+      overflow: hidden;
+      /* 触发 BFC，防止外部元素影响布局 */
+    }
+
+    .left {
+      float: left;
+      width: 25%;
+      /* 左侧列宽度 */
+      height: 100px;
+      background-color: red;
+    }
+
+    .right {
+      height: 150px;
+      background-color: blue;
+      margin-left: 25%;
+      /* 右侧列跨越左侧列 */
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container">
+    <div class="left"></div>
+    <div class="right"></div>
+  </div>
+</body>
+
+</html>

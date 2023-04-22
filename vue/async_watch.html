@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./js/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <p>{{ message }}</p>
+    <button @click="changeMessage">Change Message</button>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        message: 'hello world'
+      },
+      watch: {
+        message: {
+          handler: function () {
+            this.asyncMethod().then(() => {
+              console.log(this.message)
+            })
+          }
+        }
+      },
+      methods: {
+        async asyncMethod() {
+          // 模拟异步操作
+          return new Promise(resolve => {
+            setTimeout(() => {
+              resolve()
+            }, 50)
+          })
+        },
+        changeMessage() {
+          this.message = 'Hello, Vue!'
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

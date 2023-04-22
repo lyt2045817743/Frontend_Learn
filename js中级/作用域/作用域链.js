@@ -7,10 +7,11 @@ function fun(a) {
     console.log(a, b);
   }
 }
-
+console.log(111);
 const f = fun(1);
 f();
 console.log(111);
+fun(2);
 
 
 

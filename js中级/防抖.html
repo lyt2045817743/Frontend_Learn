@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <input id="ipt" />
+  <script>
+    let ipt = document.getElementById('ipt');
+    let dbFun = debounce()
+    ipt.addEventListener('keyup', function (e) {
+      dbFun(e.target.value);
+    })
+
+    function debounce() {
+      let timer; // 不用闭包也可以实现，这里只是为了限制它的作用域，更私有，保护变量不被意外修改？？
+      return function (value) {
+        clearTimeout(timer);
+        console.log(timer);
+        timer = setTimeout(() => {
+          console.log(value)
+        }, 500);
+      }
+    }
+  </script>
+</body>
+
+</html>
