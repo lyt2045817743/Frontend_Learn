@@ -26,10 +26,12 @@
   <ul id="books"></ul>
   <button id="add-btn">添加书籍</button>
   <button id="clear-btn">清空书籍</button>
+  <button id="concur">光标使用</button>
   <script>
     const ul = document.querySelector('#books');
     const addBtn = document.querySelector('#add-btn');
     const clearBtn = document.querySelector('#clear-btn');
+    const concurBtn = document.querySelector('#concur');
 
     // 视图更新
     function updateView() {
@@ -109,6 +111,25 @@
         console.log(delKey);
         updateView();
         alert('删除成功！')
+      }
+    }
+  
+    // 光标的使用
+    concurBtn.onclick = function () {
+      const transaction = db.transaction('books');
+      const books = transaction.objectStore('books');
+      const request = books.openCursor(IDBKeyRange.lowerBound(7));
+
+      request.onsuccess =function (event) {
+        const cursor = request.result;
+        if (cursor) {
+          const { key, value, primaryKey } = cursor;
+          console.log(key, value, primaryKey);
+          alert(value.name);
+          cursor.continue();
+        } else {
+          console.log('No more books');
+        }
       }
     }
   </script>
