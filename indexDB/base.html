@@ -33,6 +33,8 @@
     const clearBtn = document.querySelector('#clear-btn');
     const concurBtn = document.querySelector('#concur');
 
+    init();
+
     // 视图更新
     function updateView() {
       const transaction = db.transaction('books', 'readwrite');
@@ -50,31 +52,33 @@
 
     }
 
-    // 数据库初始化
     let db, books;
-    let openRequest = indexedDB.open('base', 6);
-    openRequest.onsuccess = function (event) {
-      db = openRequest.result;
-      console.log('openRequest success');
-      updateView();
-    }
-    openRequest.onupgradeneeded = function (event) {
-      db = openRequest.result;
-      console.log('onupgradeneeded...', event.target.result === db); // true
-      if (!db.objectStoreNames.contains('books')) {
-        books = db.createObjectStore('books', { keyPath: 'id', autoIncrement: true });
-      } else {
-        // 此时已经有正在执行的事务，是不能创建新的事务的
-        const transaction = event.target.transaction;
-        books = transaction.objectStore('books');
+    // 数据库初始化
+    function init() {
+      let openRequest = indexedDB.open('base', 6);
+      openRequest.onsuccess = function (event) {
+        db = openRequest.result;
+        console.log('openRequest success');
+        updateView();
       }
-      // 创建price索引
-      if(!books.indexNames.contains('price_idx')) {
-        books.createIndex('price_idx', 'price');
+      openRequest.onupgradeneeded = function (event) {
+        db = openRequest.result;
+        console.log('onupgradeneeded...', event.target.result === db); // true
+        if (!db.objectStoreNames.contains('books')) {
+          books = db.createObjectStore('books', { keyPath: 'id', autoIncrement: true });
+        } else {
+          // 此时已经有正在执行的事务，是不能创建新的事务的
+          const transaction = event.target.transaction;
+          books = transaction.objectStore('books');
+        }
+        // 创建price索引
+        if(!books.indexNames.contains('price_idx')) {
+          books.createIndex('price_idx', 'price');
+        }
       }
-    }
-    openRequest.onerror = function () {
-      console.log('openRequest error');
+      openRequest.onerror = function () {
+        console.log('openRequest error');
+      }
     }
 
     // 添加书籍
