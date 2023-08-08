@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MutationObserver</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css" rel="stylesheet">
+  <style>
+    .language-javascript {
+      width: 40%;
+    }
+  </style>
+</head>
+<body>
+  <div contenteditable id="elem">这是一段<span>可编辑</span>文本</div>
+  <pre class="language-javascript">
+    <code>
+      // 这里是代码
+      let hello = "world";
+    </code>
+  </pre>
+
+  <script>
+    const observer = new MutationObserver((mutationRecords) => {
+      console.log(mutationRecords);
+    });
+
+    const elem = document.querySelector('#elem');
+
+    observer.observe(elem, {
+      childList: true,
+      subtree: true,
+      characterDataOldValue: true
+      // characterData: true
+    })
+
+  </script>
+</body>
+</html>
