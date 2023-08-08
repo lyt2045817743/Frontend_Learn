@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>child</title>
+</head>
+<body>
+  <div>子窗口</div>
+  <button id="myBtn">修改opener窗口的文档内容</button>
+  <button id="modifyBtn">触发opener窗口的跳转方法</button>
+  <script>
+    console.log('child1 start');
+
+    const myBtn = document.querySelector('#myBtn');
+
+    // 同源的子窗口可以获取父窗口文档并修改其内容
+    myBtn.onclick = function() {
+      parentDoc = window.parent.document;
+      parentTitle = parentDoc.querySelector('#title');
+      parentTitle.innerHTML = '父窗口的内容被子窗口修改了！'
+    }
+
+    console.log('子页面的window window.top === window.parent: ', window.top === window.parent);
+
+    // 同源的子窗口可以调用父窗口的方法
+    modifyBtn.onclick = function () {
+      window.top.sameSiteBtnOfMainClick();
+      // 同源的子窗口可以拿到父窗口的变量
+      // alert(window.top.test);
+    }
+
+    console.log('child1 end');
+  </script>
+  <script>
+  </script>
+</body>
+</html>

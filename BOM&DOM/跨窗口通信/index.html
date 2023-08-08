@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>跨窗口通信</title>
+</head>
+<body>
+  <div id="title">父窗口</div>
+  <!-- 不能使用自闭合的标签，否则下面的内容不会解析 -->
+  <!-- sandbox="allow-scripts" 添加该属性后，即使child和该窗口同源，也不能访问其内容 -->
+  <iframe id="iframe" src="./child.html" name="child" height="500px"></iframe>
+  <!-- 大多数的网站都做了限制，不允许其作为iframe嵌套在其他网站，他们限制的方式不同：baidu、javascript.info -->
+  <iframe src="https://www.chinanews.com.cn/" name="outSite" width="70%" height="500px"></iframe>
+  <div>
+   <button id="sameSiteBtn" onclick="sameSiteBtnOfMainClick()">跳转同源新窗口</button>
+   <button id="btn" onclick="btnOfMainClick()">跳转非同源窗口</button>
+  </div>
+  <script>
+    console.log('parent start');
+
+    const childIframe = document.querySelector('#iframe');
+    // 通过多种方式获取iframe的窗口引用
+    console.log('childIframe.contentWindow === window.frames.child: ', childIframe.contentWindow === window.frames.child); // true
+    console.log('父页面的window window.frames.child === window.frames[0]: ', window.frames.child === window.frames[0]); // true
+
+    var test = '测试获取opener的变量';
+
+    // 测试使用window.open打开同源页面
+    function sameSiteBtnOfMainClick () {
+      window.open('./open.html', '_blank');
+    }
+
+    // 测试使用window.open打开非同源页面
+    function btnOfMainClick() {
+      window.open('https://www.baidu.com', '_blank');
+    }
+
+    // 错误文档陷阱：加载的文档与初始的文档不同
+    const oldChild1Doc = childIframe.contentDocument;
+    // childIframe.onload = function () {
+    //   const newChild1Doc = childIframe.contentDocument;
+    //   alert(`iframe初始化的文档和加载完成后的文档是否相同：${oldChild1Doc === newChild1Doc}`); // false
+    // }
+
+    // 更早地捕获文档准备好的时刻：之所以不在onload中处理，是因为它是在所有资源都准备好时才触发
+    const timer = setInterval(() => {
+      const newChild1Doc = childIframe.contentDocument;
+      if(newChild1Doc == oldChild1Doc) return;
+      // alert('该文档已是最新文档');
+      clearInterval(timer);
+    }, 100)
+
+    // onmessage监听并接收消息
+    window.addEventListener('message', (event) => {
+      if (event.origin === 'https://www.baidu.com') {
+        console.log(`接受到一条来自${event.origin}的消息：${event.data}`);
+        alert(`接受到一条来自${event.origin}的消息：${event.data}`);
+        // 回消息
+        event.source.postMessage('收到啦！', '*');
+      }
+    })
+
+    console.log('parent end');
+  </script>
+</body>
+</html>
