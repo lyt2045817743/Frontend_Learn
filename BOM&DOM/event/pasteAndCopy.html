@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>剪切板</title>
+</head>
+<body>
+  <p id="canCopy">这是一段可以随意复制的内容：
+    松下问童子，
+    言师采药去。
+    只在此山中，
+    云深不知处
+  </p>
+  <p id="cannotCopy">这里的内容不会被复制成功：
+    白日依山尽，
+    黄河入海流。
+    欲穷千里目，
+    更上一层楼。
+  </p>
+
+  <input type="text" placeholder="粘贴到这里" />
+
+  <script>
+    const canCopyP = document.querySelector('#canCopy');
+    const cannotCopyP = document.querySelector('#cannotCopy');
+    const input = document.querySelector('input');
+
+    canCopyP.oncopy = function(event) {
+      alert(`复制成功了！内容为：${document.getSelection()}`)
+    }
+
+    cannotCopyP.oncopy = function (event) {
+      alert('复制失败，不信就粘贴试试吧');
+      event.preventDefault();
+    }
+
+    input.onpaste = function(event) {
+      alert(`『${event.clipboardData.getData('text/plain')}』将被粘贴到输入框中！`);
+    }
+
+  </script>
+</body>
+</html>
