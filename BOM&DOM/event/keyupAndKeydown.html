@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>键盘事件</title>
+</head>
+<body>
+  <!-- 测试各个设备的各个键盘按键的key和code -->
+  <input style="width: 300px;" onkeydown="onKeyDown(event)" placeholder="测试各个设备的各个键盘按键的key和code" />
+  <div id="content"></div>
+
+  <!-- 扩展热键：组合键同时按下执行回调 -->
+  <input style="width: 300px;" onkeydown="onHotKeyPress(event)" onkeyup="onKeyup(event)" placeholder="扩展热键一：试一下同时按下Q和W" />
+  <input style="width: 300px;" id="hotKey2" placeholder="扩展热键二：试一下同时按下Q和W" />
+
+
+  <script>
+    const contentDiv = document.querySelector('#content')
+
+    // 测试各个设备的各个键盘按键的key和code
+    function onKeyDown(event) {
+      contentDiv.innerHTML = `key: ${event.key}, code: ${event.code}`;
+    }
+
+    // 扩展热键方法一：组合键同时按下执行回调
+    function runOnKeys1(callback, code1, code2) {
+      let lastEvent;
+
+      return {
+        keydown: function(event) {
+          if ((lastEvent?.code === code1 && event.code === code2) || (lastEvent?.code === code2 && event.code === code1) ) {
+            callback();
+            lastEvent = null;
+          } else {
+            lastEvent = event;
+          }
+        },
+        keyup: function(event) {
+          if (event.code === lastEvent.code) {
+            lastEvent = null;
+          } 
+        }
+      }
+    }
+
+    const keyChangeFun = runOnKeys1(() => alert("Hello!"), "KeyQ", 'KeyW');
+    const onHotKeyPress = keyChangeFun.keydown;
+    const onKeyup = keyChangeFun.keyup;
+
+    // 扩展热键方法二：组合键同时按下执行回调
+    function runOnKeys2(callback, ...codes) {
+      const hotKey2Input = document.querySelector('#hotKey2');
+      const pressedKey = new Set();
+      hotKey2Input.addEventListener('keydown', (event) => {
+        pressedKey.add(event.code);
+        for (let code of codes) {
+          if (!pressedKey.has(code)) {
+            return;
+          }
+        }
+        callback();
+        pressedKey.clear();
+      })
+
+      hotKey2Input.addEventListener('keyup', (event) => {
+        pressedKey.delete(event.code);
+      })
+    }
+
+    runOnKeys2(() => alert("Hello!"), "KeyQ", 'KeyW', 'KeyE')
+
+  </script>
+</body>
+</html>
