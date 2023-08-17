@@ -13,7 +13,7 @@ similarity_threshold = 0
 if len(parameters) == 2:
     similarity_threshold = int(parameters[1])
 
-print("please waiting...")
+print("please wait...")
 
 with open('image_paths.txt', 'r') as file:
     image_paths = file.readlines()
@@ -33,4 +33,5 @@ for path in image_paths_array:
     except Exception as e:
         print("An error occurred while trying to open {}: {} error".format(path, e))
 
+print('job success!')
 print(similarities)
