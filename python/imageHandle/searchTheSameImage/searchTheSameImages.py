@@ -15,7 +15,7 @@ if len(parameters) == 2:
 
 print("please wait...")
 
-with open('image_paths.txt', 'r') as file:
+with open('imagePaths.txt', 'r') as file:
     image_paths = file.readlines()
 
 image_paths_array = [path.strip() for path in image_paths]
@@ -33,5 +33,5 @@ for path in image_paths_array:
     except Exception as e:
         print("An error occurred while trying to open {}: {} error".format(path, e))
 
-print('job success!')
+print('job success...')
 print(similarities)

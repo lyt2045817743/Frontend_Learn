@@ -9,7 +9,9 @@ directory_pathArr = parameters
 
 image_extensions = ['.jpg', '.jpeg', '.png', '.gif']
 
-output_filename = 'image_paths.txt'
+output_filename = 'imagePaths.txt'
+
+print("please wait...")
 
 image_paths = []
 for directory_path in directory_pathArr:
@@ -23,4 +25,4 @@ with open(output_filename, 'w') as output_file:
     for path in image_paths:
         output_file.write(path + '\n')
 
-print("images routes are already: ", output_filename)
+print("success! The file for storing the image path is ready: {}".format(output_filename))
