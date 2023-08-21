@@ -15,7 +15,7 @@ image_extensions = ['.jpg', '.jpeg', '.png', '.gif']
 # 输出所有图片路径的文件名称
 output_filename = 'imagePaths.txt'
 
-print("🚩 开始收集，稍等一下...")
+print("🚩 开始收集图片路径，稍等一下...")
 
 # 收集目标文件夹图片路径
 image_paths = []
@@ -31,4 +31,4 @@ with open(output_filename, 'w') as output_file:
     for path in image_paths:
         output_file.write(path + '\n')
 
-print("✅ 成功啦! 收集图片路径的文件已准备好: {}".format(output_filename))
+print("📁 收集图片路径的文件已准备好: {}".format(output_filename))
