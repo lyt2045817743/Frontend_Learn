@@ -26,7 +26,7 @@ color_similarity_threshold = 0
 try:
   user_input = raw_input("请输入相似度的阙值，阙值越低，相似度越高（0，19）：")
   similarity_threshold = int(user_input)
-except ValueType:
+except ValueError:
   print('请输入整数')
 
 image_extensions = ['.jpg', '.jpeg', '.png', '.gif']
