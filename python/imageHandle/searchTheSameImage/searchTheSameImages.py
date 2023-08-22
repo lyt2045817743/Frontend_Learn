@@ -7,16 +7,15 @@
 # 例：python searchTheSameImages.py ~/Desktop/example.png /dir1 /dir2 （dir数量 > 0）
 
 import sys
-if sys.version_info.major != 2:
-    print("您当前的python版本为{}.x，请切换为python2.x的版本".format(sys.version_info.major))
-    sys.exit(0)  # 退出并返回状态码 0 表示成功
-
 from PIL import Image
 import imagehash
 import os
 import tempfile
 import shutil
 import subprocess
+
+major_version, minor_version = sys.version_info[:2]
+inputFun = raw_input if major_version == 2 else input
 
 args = sys.argv
 
@@ -32,7 +31,7 @@ color_similarity_threshold = 0
 
 # 用户配置的阙值
 try:
-  user_input = raw_input("请输入相似度的阙值，阙值越低，相似度越高（0~19）：")
+  user_input = inputFun("请输入相似度的阙值，阙值越低，相似度越高（0~19）：")
   similarity_threshold = int(user_input)
 except ValueError:
   print('传参错误：请输入整数')
@@ -76,7 +75,7 @@ for path in image_paths_array:
 if len(similarities) != 0:
     print('✅ 成功啦！以下是相似的图片路径集合')
     print(similarities)
-    user_choice = raw_input("\n是否生成临时目录来查看这些图片？(y/n): ")
+    user_choice = inputFun("\n是否生成临时目录来查看这些图片？(y/n): ")
     # 根据用户的选择继续执行后续代码
     if user_choice.lower() == "y":
         # 创建一个临时目录
