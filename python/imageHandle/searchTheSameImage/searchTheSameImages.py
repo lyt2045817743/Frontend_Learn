@@ -1,37 +1,55 @@
 # -*- coding: utf-8 -*-
-# 功能：将imagePaths.txt中所有的图片和目标图片进行比对
-# 输出相似的图片。可输入配置不同的阙值，阙值越大，输出的图片与目标图片相似度越小
+# 功能：将项目中/res、app/views目录的所有图片和目标图片进行比对
+# 输出相似的图片。可输入配置不同的阙值（可选），阙值越大，输出的图片与目标图片相似度越小
+# 使用前，请先安装相关依赖
+# pip install Pillow
+# pip install imagehash
+# 例：python searchTheSameImages.py ~/Desktop/example.png /dir1 /dir2 （dir数量 > 0）
+
+import sys
+if sys.version_info.major != 2:
+    print("您当前的python版本为{}.x，请切换为python2.x的版本".format(sys.version_info.major))
+    sys.exit(0)  # 退出并返回状态码 0 表示成功
+
 from PIL import Image
 import imagehash
-import sys
 import os
 import tempfile
 import shutil
 import subprocess
 
-if sys.version_info.major != 2:
-    print("您当前的python版本为{}，请替换为python2.x版本".format(sys.version_info.major))
-    sys.exit(0)  # 退出并返回状态码 0 表示成功
-
 args = sys.argv
 
-script_name = args[0]
-parameters = args[1:]
+if len(args) < 3:
+    print("参数错误，例：python searchTheSameImages.py ~/Desktop/example.png /dir1 /dir2 （其中dir数量 > 0）")
+    sys.exit(0)
 
-# 需要比对的目标图片路径
-given_image_path = parameters[0]
+script_name = args[0]
+given_image_path = args[1]
+directory_pathArr = args[1:]
 similarity_threshold = 0
 color_similarity_threshold = 0
 
-# 如果用户配置了阙值，则根据输入重置
-if len(parameters) == 2:
-    similarity_threshold = float(parameters[1])
+# 用户配置的阙值
+try:
+  user_input = raw_input("请输入相似度的阙值，阙值越低，相似度越高（0~19）：")
+  similarity_threshold = int(user_input)
+except ValueError:
+  print('传参错误：请输入整数')
+  sys.exit(0)
 
-print("🚩 开始比对图片内容，稍等一下...\n")
+image_extensions = ['.jpg', '.jpeg', '.png', '.gif']
 
-# 读取收集好的所有图片路径
-with open('imagePaths.txt', 'r') as file:
-    image_paths = file.readlines()
+# 收集目标文件夹图片路径
+image_paths = []
+for directory_path in directory_pathArr:
+    for root, _, files in os.walk(directory_path):
+        for file in files:
+            _, ext = os.path.splitext(file)
+            if ext.lower() in image_extensions:
+                image_paths.append(os.path.join(root, file))
+
+print("\n🚩 比对图片内容中...\n")
 
 image_paths_array = [path.strip() for path in image_paths]
 
@@ -54,6 +72,7 @@ for path in image_paths_array:
     except Exception as e:
         print("❗️ 部分图片解析失败 {}: {} error\n".format(path, e))
 
+# 输出比对结果
 if len(similarities) != 0:
     print('✅ 成功啦！以下是相似的图片路径集合')
     print(similarities)
@@ -80,4 +99,4 @@ else:
     print("❓ 并没有找到相似的图片，设置大一点的阙值重新试试呢？(0-19)")
     sys.exit(0)
 
-print("👋 本次查找结束！（设置不同的阙值结果会有所不同。未达到预期时，可重新设置阙值试下）")
+print("\n👋 本次查找结束！（设置不同的阙值结果会有所不同。未达到预期时，可重新设置阙值试下）")

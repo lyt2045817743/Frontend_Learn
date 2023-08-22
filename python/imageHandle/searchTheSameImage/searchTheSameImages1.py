@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# 功能：将项目中/res、app/views目录的所有图片和目标图片进行比对
-# 输出相似的图片。可输入配置不同的阙值（可选），阙值越大，输出的图片与目标图片相似度越小
+# 功能：将imagePaths.txt中所有的图片和目标图片进行比对
+# 输出相似的图片。可输入配置不同的阙值，阙值越大，输出的图片与目标图片相似度越小
 from PIL import Image
 import imagehash
 import sys
@@ -16,31 +16,22 @@ if sys.version_info.major != 2:
 args = sys.argv
 
 script_name = args[0]
+parameters = args[1:]
+
 # 需要比对的目标图片路径
-given_image_path = args[1]
-directory_pathArr = args[1:]
+given_image_path = parameters[0]
 similarity_threshold = 0
 color_similarity_threshold = 0
 
 # 如果用户配置了阙值，则根据输入重置
-try:
-  user_input = raw_input("请输入相似度的阙值，阙值越低，相似度越高（0，19）：")
-  similarity_threshold = int(user_input)
-except ValueError:
-  print('请输入整数')
+if len(parameters) == 2:
+    similarity_threshold = float(parameters[1])
 
-image_extensions = ['.jpg', '.jpeg', '.png', '.gif']
+print("🚩 开始比对图片内容，稍等一下...\n")
 
-# 收集目标文件夹图片路径
-image_paths = []
-for directory_path in directory_pathArr:
-    for root, _, files in os.walk(directory_path):
-        for file in files:
-            _, ext = os.path.splitext(file)
-            if ext.lower() in image_extensions:
-                image_paths.append(os.path.join(root, file))
-
-print("🚩 比对图片内容中...\n")
+# 读取收集好的所有图片路径
+with open('imagePaths.txt', 'r') as file:
+    image_paths = file.readlines()
 
 image_paths_array = [path.strip() for path in image_paths]
 
@@ -63,7 +54,6 @@ for path in image_paths_array:
     except Exception as e:
         print("❗️ 部分图片解析失败 {}: {} error\n".format(path, e))
 
-# 输出比对结果
 if len(similarities) != 0:
     print('✅ 成功啦！以下是相似的图片路径集合')
     print(similarities)
