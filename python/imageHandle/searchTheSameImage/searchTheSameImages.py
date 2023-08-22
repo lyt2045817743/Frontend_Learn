@@ -7,14 +7,35 @@
 # 例：python searchTheSameImages.py ~/Desktop/example.png /dir1 /dir2 （dir数量 > 0）
 
 import sys
-from PIL import Image
-import imagehash
 import os
 import tempfile
 import shutil
 import subprocess
+import importlib
 
+# 获取当前 Python 版本信息
 major_version, minor_version = sys.version_info[:2]
+
+def install_package(package_name):
+    subprocess.check_call(["python{}.{}".format(major_version, minor_version), "-m", "pip", "install", package_name])
+
+def check_and_install(lib_name, package_name):
+    try:
+        importlib.import_module(lib_name)
+        print("{} 已安装".format(package_name))
+    except ModuleNotFoundError:
+        subprocess.check_call(["pip", "install", "--upgrade", "pip", "setuptools"])
+        print("\n{} 未安装，开始安装...".format(package_name))
+        install_package(package_name)
+        print("{} 安装完成\n".format(package_name))
+
+# 检查并安装第三方库
+check_and_install("PIL", "Pillow")
+check_and_install("imagehash", "imagehash")
+
+from PIL import Image
+import imagehash
+
 inputFun = raw_input if major_version == 2 else input
 
 args = sys.argv
@@ -31,7 +52,7 @@ color_similarity_threshold = 0
 
 # 用户配置的阙值
 try:
-  user_input = inputFun("请输入相似度的阙值，阙值越低，相似度越高（0~19）：")
+  user_input = inputFun("\n请输入相似度的阙值，阙值越低，相似度越高（0~19）：")
   similarity_threshold = int(user_input)
 except ValueError:
   print('传参错误：请输入整数')
