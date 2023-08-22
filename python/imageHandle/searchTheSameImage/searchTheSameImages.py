@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
-# 功能：将项目中/res、app/views目录的所有图片和目标图片进行比对
-# 输出相似的图片。可输入配置不同的阙值（可选），阙值越大，输出的图片与目标图片相似度越小
-# 使用前，请先安装相关依赖
-# pip install Pillow
-# pip install imagehash
+# 功能：将目标图片和一个/多个目录的图片进行内容比对。
+# 脚本执行过程中，根据提示设置相似性阙值，阙值越小，输出的图片与目标图片越相似
+# 输出：与目标图片相似的图片组。
 # 例：python searchTheSameImages.py ~/Desktop/example.png /dir1 /dir2 （dir数量 > 0）
 
 import sys
