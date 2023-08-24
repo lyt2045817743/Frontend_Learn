@@ -14,6 +14,8 @@ import importlib
 # 获取当前 Python 版本信息
 major_version, minor_version = sys.version_info[:2]
 
+errorName = ImportError if major_version == 2 else ModuleNotFoundError
+
 def install_package(package_name):
     subprocess.check_call(["python{}.{}".format(major_version, minor_version), "-m", "pip", "install", package_name])
 
@@ -21,7 +23,7 @@ def check_and_install(lib_name, package_name):
     try:
         importlib.import_module(lib_name)
         print("{} 已安装".format(package_name))
-    except ModuleNotFoundError:
+    except errorName:
         subprocess.check_call(["pip", "install", "--upgrade", "pip", "setuptools"])
         print("\n{} 未安装，开始安装...".format(package_name))
         install_package(package_name)
