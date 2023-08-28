@@ -14,6 +14,7 @@ import importlib
 # 获取当前 Python 版本信息
 major_version, minor_version = sys.version_info[:2]
 
+inputFun = raw_input if major_version == 2 else input
 errorName = ImportError if major_version == 2 else ModuleNotFoundError
 
 def install_package(package_name):
@@ -36,7 +37,6 @@ check_and_install("imagehash", "imagehash")
 from PIL import Image
 import imagehash
 
-inputFun = raw_input if major_version == 2 else input
 
 args = sys.argv
 
