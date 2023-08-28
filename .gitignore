@@ -49,4 +49,5 @@ js中级/面向对象/*.js
 
 python/imageHandle/searchTheSameImage/imagePaths.txt
 
-**/fds
+**/mi_fds_images
+**/__pycache__

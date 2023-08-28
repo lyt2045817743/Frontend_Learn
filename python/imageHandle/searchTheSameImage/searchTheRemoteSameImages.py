@@ -39,10 +39,10 @@ fds_client = GalaxyFDSClient(
     ),
 )
 
-local_folder = './fds'
+local_folder = './mi_fds_images'
 os.makedirs(local_folder, exist_ok=True)
 
-output_file_path = "./fds/mapping_data.json"
+output_file_path = "./mi_fds_images/mapping_data.json"
 mapping_data = {}
 if os.path.exists(output_file_path):
     with open(output_file_path, 'r') as json_file:
