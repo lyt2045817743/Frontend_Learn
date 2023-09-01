@@ -133,7 +133,8 @@ def filter_by_color_similarity(given_image_path, image_paths_array, color_simila
 
 # 复制图片到指定目录
 def copy_images(src_paths, dest_folder):
-    os.makedirs(dest_folder, exist_ok=True)
+    if not os.path.exists(dest_folder):
+        os.makedirs(dest_folder)
     for idx, src_path in enumerate(src_paths):
         filename = os.path.basename(src_path)
         dest_path = os.path.join(dest_folder,  "{}-{}".format(idx, filename))
