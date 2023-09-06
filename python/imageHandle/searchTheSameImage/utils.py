@@ -1,8 +1,14 @@
 # -*- coding: utf-8 -*-
-import os
 import sys
+major_version, minor_version = sys.version_info[:2]
+if major_version == 2:
+  print("Python2已终止支持，请安装Python3+的版本：https://www.python.org/downloads/")
+  sys.exit(0)
+
+import os
 import subprocess
 import importlib
+from urllib.parse import unquote
 
 # 版本兼容问题处理
 major_version, minor_version = sys.version_info[:2]
@@ -54,3 +60,12 @@ def check_and_install(lib_name, package_name):
 # 获取文件的最近修改时间
 def get_image_update_timestamp(path):
     return int(os.path.getmtime(path) * 1000)
+
+def decode_str(str):
+    try:
+        decoded_str = unquote(str)
+        utf8_str = decoded_str.encode('latin1').decode('utf-8')
+    except UnicodeEncodeError:
+        # print("\n解码失败：{}".format(str))
+        return str
+    return utf8_str

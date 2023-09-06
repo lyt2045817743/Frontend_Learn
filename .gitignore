@@ -51,5 +51,6 @@ python/imageHandle/searchTheSameImage/imagePaths.txt
 
 **/mi_fds_images
 **/__pycache__
-**/image_info_cache.json
 **/*.pyc
+**/项目重复图片汇总.xlsx
+scripts/imageHandle/cache

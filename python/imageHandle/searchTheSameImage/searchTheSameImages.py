@@ -20,6 +20,11 @@ import json
 major_version, minor_version = sys.version_info[:2]
 inputFun = raw_input if major_version == 2 else input
 
+# 该脚本单独运行时：需要根据需要自行配置
+temp_dir = 'scripts/imageHandle/cache'
+
+cache_file_end = '/image_info_cache.json'
+cache_file_path = temp_dir + cache_file_end
 image_info_cache_map = {}
 
 def input_similarity_threshold():
@@ -43,10 +48,7 @@ def install_image_lib():
     import imagehash
     from tqdm import tqdm
 
-def collect_images_and_search(given_image_path, directory_pathArr, similarity_threshold):
-
-    color_similarity_threshold = 0
-
+def collect_images_path(directory_pathArr):
     image_extensions = ['.jpg', '.jpeg', '.png', '.gif']
 
     # 收集本地目标文件夹图片路径
@@ -60,6 +62,14 @@ def collect_images_and_search(given_image_path, directory_pathArr, similarity_th
 
     image_paths_array = [path.strip() for path in image_paths]
 
+    return image_paths_array
+
+def collect_images_and_search(given_image_path, directory_pathArr, similarity_threshold):
+
+    color_similarity_threshold = 0
+
+    image_paths_array = collect_images_path(directory_pathArr)
+
     similarities = search_the_same_images(given_image_path, image_paths_array, similarity_threshold)
     result = filter_by_color_similarity(given_image_path, similarities, color_similarity_threshold)
 
@@ -67,6 +77,9 @@ def collect_images_and_search(given_image_path, directory_pathArr, similarity_th
 
 def init_image_info_cache_map():
     global image_info_cache_map
+
+    if not os.path.exists(temp_dir):
+        os.makedirs(temp_dir)
     # 对图片更新时间和hash值进行缓存
     if os.path.exists(cache_file_path):
         with open(cache_file_path, 'r') as json_file:
@@ -76,12 +89,16 @@ def get_image_hash_from_cache(path):
     global image_info_cache_map
     latest_update_time = utils.get_image_update_timestamp(path)
     if path not in image_info_cache_map or image_info_cache_map[path]["update_time"] != latest_update_time:
-        image = Image.open(path)
-        image_hash = imagehash.phash(image)
-        image_info_cache_map[path] = {
-            "phash": str(image_hash),
-            "update_time": latest_update_time
-        }
+        try:
+            image = Image.open(path)
+            image_hash = imagehash.phash(image)
+            image_info_cache_map[path] = {
+                "phash": str(image_hash),
+                "update_time": latest_update_time
+            }
+        except Exception as e:
+            print("\n❗️ 部分图片解析失败 {}: {} error\n".format(path, e))
+            return None
     return image_info_cache_map[path]
 
 def update_image_info_cache_map():
@@ -101,15 +118,16 @@ def search_the_same_images(given_image_path, image_paths_array, similarity_thres
     similarities = []
     init_image_info_cache_map() # 对图片的hash值进行缓存
     for path in tqdm(image_paths_array, desc="Processing", unit="iteration", ncols=100):
-        try:
-            image_all_hash = get_image_hash_from_cache(path)
-            image_hash = imagehash.hex_to_hash(image_all_hash["phash"])
+        image_all_hash = get_image_hash_from_cache(path)
 
-            similarity = given_hash - image_hash
-            if similarity <= similarity_threshold:
-                similarities.append(path)
-        except Exception as e:
-            print("\n❗️ 部分图片解析失败 {}: {} error\n".format(path, e))
+        if image_all_hash == None:
+            continue
+
+        image_hash = imagehash.hex_to_hash(image_all_hash["phash"])
+
+        similarity = given_hash - image_hash
+        if similarity <= similarity_threshold:
+            similarities.append(path)
     update_image_info_cache_map()
     return similarities
 
@@ -192,7 +210,7 @@ def result_handle(config_arr):
 
 
 if __name__ == "__main__":
-    cache_file_path = './image_info_cache.json'
+    cache_file_path = './cache/image_info_cache.json'
     parser = argparse.ArgumentParser(description="搜索本地某些路径下与目标图片相似的图片")
     parser.add_argument("imagePath", type=str, help="目标图片路径")
     parser.add_argument("dirPaths", type=str, help="本地目录路径数组。例['dir1', 'dir2', ...]")

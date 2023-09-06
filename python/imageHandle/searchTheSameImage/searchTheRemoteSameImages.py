@@ -5,7 +5,7 @@
   # option1: --dirPaths FDS目录路径数组。例['Icons', 'images', ...]。默认所有
 # 脚本执行过程中，根据提示设置相似性阙值，阙值越小，输出的图片与目标图片越相似
 # 输出：与目标图片相似的图片组。
-# 例：python searchTheRemoteSameImages ~/Desktop/example.png
+# 例：python searchTheRemoteSameImages.py ~/Desktop/example.png
 import os
 import sys
 import json
@@ -17,9 +17,9 @@ import ast
 # 该脚本单独运行时：需要根据需要自行配置
 host = "cnbj1-fds.api.xiaomi.net"
 bucket_name = 'retailrevolution'
+local_folder = 'scripts/imageHandle/mi_fds_images'
 
 http_file_path = 'https://' + bucket_name + '.cnbj1.mi-fds.com/' + bucket_name
-local_folder = 'scripts/imageHandle/mi_fds_images'
 map_file = '/mapping_data.json'
 output_file_path = local_folder + map_file
 
@@ -120,7 +120,7 @@ if __name__ == "__main__":
         print("Python2已终止支持，请安装Python3+的版本：https://www.python.org/downloads/")
         sys.exit(0)
 
-    searchTheSameImages.cache_file_path = './image_info_cache.json'
+    searchTheSameImages.cache_file_path = './cache/image_info_cache.json'
 
     local_folder = './mi_fds_images'
     output_file_path = local_folder + map_file
