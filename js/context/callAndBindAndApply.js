@@ -5,6 +5,11 @@ const obj = {
 function fun1(value2, value3) {
   console.log(this.value, value2, value3);
 }
+// 实质上转变成了类似这种格式
+// const obj = {
+//   value: 1,
+//   fun1
+// };
 
 // 需要注意context参数有可能会被传Null，这时候应该默认设置为globalThis
 Function.prototype.myCall = function(context, ...args){
