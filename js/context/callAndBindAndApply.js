@@ -16,8 +16,9 @@ Function.prototype.myCall = function(context, ...args){
   const _context = context ?? globalThis;
   const key = Symbol('key');
   _context[key] = this;
-  _context[key](...args);
+  const result =  _context[key](...args);
   delete _context[key];
+  return result;
 }
 
 console.log('myCall');
@@ -29,8 +30,9 @@ Function.prototype.myApply = function(context, args = []){
   const _context = context ?? globalThis;
   const key = Symbol('key');
   _context[key] = this;
-  _context[key](...args);
+  const result = _context[key](...args);
   delete _context[key];
+  return result;
 }
 
 console.log('myApply');
@@ -40,7 +42,7 @@ Function.prototype.myBind = function(context, ...args){
   // 注意保存外部函数的this
   const _this = this;
   return function() {
-    _this.myCall(context, ...args);
+    return _this.myCall(context, ...args);
   }
 }
 
@@ -52,7 +54,7 @@ Function.prototype.myBind2 = function(context, ...args){
   // 注意保存外部函数的this
   const _this = this;
   return function(argInner) {
-    _this.myCall(context, ...args.concat(argInner));
+    return _this.myCall(context, ...args.concat(argInner));
   }
 }
 console.log('myBind2');
@@ -73,7 +75,7 @@ Function.prototype.myBind3 = function(context, ...args){
   const fNOP = function(){}
   const fBound = function() {
     // 如果 this instanceof fBound 为真：说明此时的this指向构造函数new 出来的那个实例
-    _this.myCall(this instanceof fBound ? this : context, ...args);
+    return _this.myCall(this instanceof fBound ? this : context, ...args);
   }
   fNOP.prototype = _this.prototype;
   fBound.prototype = new fNOP();
