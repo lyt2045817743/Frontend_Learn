@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    try {
+      a(); // try-catch内部捕获到异常后，异常后面的代码不会被执行
+      console.log(1);
+    } catch (error) {
+      console.log('try-catch', error);
+    }
+    console.log(2); // 但try-catch外部的代码会继续执行（语法错误除外，它内外都不会执行）
+  </script>
+</body>
+</html>

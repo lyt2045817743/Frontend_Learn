@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <p>unhandledrejection事件处理程序是为了处理异步操作中的Promise错误而引入的，而不是为了捕获全局环境中的所有错误。全局错误捕获通常使用window.onerror或其他类似的机制来处理。</p>
+  <p>无论是unhandledrejection还是error哪个事件处理函数在全局捕获到的异常，都会通过console.error的方式打印异常（红色报警）</p>
+  <script>
+    window.addEventListener('unhandledrejection', (error) => {
+      console.log('在promise内部抛出但未处理的异常：', error.message);
+    })
+
+    window.addEventListener('error', (error) => {
+      console.log('除了promise抛出的异常之外的全局js异常：', error.message);
+    })
+
+    const p = new Promise((resolve, reject) => {
+      // throw new Error('promise手动抛出的同步异常'); // （1）如果手动抛出一个异常，promise会将下面的代码忽略
+      // resolve(); // （2）下面的代码依旧会执行
+      // reject(new Error('reject包裹的异常')); // （3）下面的代码依旧会执行
+      console.log(1);
+      setTimeout(function(){
+        throw new Error('setTimeout内部回调抛出的异步异常'); //（4）即使是全局的unhandledrejection事件处理函数，也无法捕捉到setTimeout回调函数内部的异常，只能在其内部加try-catch
+      }, 500)
+    });
+    // p.catch((e) => {
+    //   console.log('promise catch捕获异常：', e);
+    // });
+    console.log(2); // 尽管我们没有给promise绑定异常处理函数catch，它也会在内部帮我们捕获到，然后抛给全局异常处理函数，因此2还是会被打印
+  </script>
+</body>
+</html>
