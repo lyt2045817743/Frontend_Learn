@@ -1,37 +1,49 @@
 function MyPromise(executor) {
   this.status = 'pending';
+  var _this = this;
   var resultHandle = [];
   function resolve(data) {
-    if (this.status !== 'pending') return;
-    this.status = 'fulfilled';
-    this.result = data;
-    handlerExe();
+    if (_this.status === 'pending') {
+      _this.status = 'fulfilled';
+      _this.result = data;
+      handlerExe();
+    }
   }
 
   function reject(error) {
-    if (this.status !== 'pending') return;
-    this.status = 'rejected';
-    this.result = error;
-    handlerExe();
+    if (_this.status === 'pending') {
+      _this.status = 'rejected';
+      _this.result = error;
+      handlerAllExe();
+    }
   }
 
-  function handlerExe() {
+  function handlerAllExe() {
     while(resultHandle.length) {
       var curHandle = resultHandle.shift();
-      var { onFulfilled, onRejected } = curHandle;
-      try {
-        if (this.status === 'fulfilled') {
-          if (typeof onFulfilled === 'function') {
-            onFulfilled(this.result);
-          }
-        } else if (this.status === 'rejected') {
-          if (typeof onRejected === 'function') {
-            onRejected(this.result);
-          }
+      handlerEachExe(curHandle);
+    }
+  }
+
+  function handlerEachExe({ onFulfilled, onRejected, resolve, reject }) {
+    try {
+      if (_this.status === 'fulfilled') {
+        if (typeof onFulfilled === 'function') {
+          const result = onFulfilled(_this.result);
+          resolve(result);
+        } else {
+          resolve(_this.result);
         }
-      } catch (error) {
-        onRejected(error);
+      } else if (_this.status === 'rejected') {
+        if (typeof onRejected === 'function') {
+          const result = onRejected(_this.result);
+          resolve(result);
+        } else {
+          reject(_this.result);
+        }
       }
+    } catch (error) {
+      reject(error);
     }
   }
 
@@ -41,60 +53,36 @@ function MyPromise(executor) {
     reject(e);
   }
 
-  this.then = (onFulfilled, onRejected) => {
-    this.resultHandle.push(onFulfilled);
-    this.errorHandle = onRejected;
+  this.then = function(onFulfilled, onRejected) {
     return new Promise((resolve, reject) => {
-      if (this.status === 'fulfilled') {
-        try {
-          if (typeof onFulfilled === 'function') {
-            const result = onFulfilled(this.result);
-            resolve(result);
-          } else {
-            resolve(this.result);
-          }
-        } catch (error) {
-          reject(error);
-        }
-      } else if (this.status === 'rejected') {
-        try {
-          if (typeof onRejected === 'function') {
-            const result = onRejected(this.result);
-            resolve(result);
-          } else {
-            reject(this.result);
-          }
-        } catch (error) {
-          reject(error);
-        }
+      if (_this.status !== 'pending') {
+        handlerEachExe({ onFulfilled, onRejected, resolve, reject });
       } else {
         resultHandle.push({
           onFulfilled,
-          onRejected
+          onRejected,
+          resolve,
+          reject
         })
       }
     })
-
   }
 
-  this.catch = (onRejected) => {
-    return this.then(null, onRejected);
+  this.catch = function (onRejected) {
+    return _this.then(null, onRejected);
   }
 }
 
 const p = new MyPromise((resolve, reject) => {
   resolve('success');
-  reject('error')
+  // reject('error');
 })
 
 p.then((data) => {
   console.log(data);
+  fun()
 }, (error) => {
-  console.error(error);
-})
-
-p.then((data) => {
-  console.log(data);
+  console.log('then onRejected: ', error);
 }).catch((error) => {
-  console.error(error);
+  console.log('next promise: ', error);
 })
