@@ -18,8 +18,9 @@ asyncFunFulfilled().then((result2) => {
 })
 
 async function asyncFunRejected() {
-  // return Promise.reject(new Error('错误'));
-  throw new Error('错误'); // 和上面作用一样
+  const result = await Promise.reject(new Error('错误'));
+  // throw new Error('错误'); // 和上面作用一样
+  return result;
 }
 
 asyncFunRejected().catch((error) => {
