@@ -1,7 +1,9 @@
-const { tokenizer } = require('./.');
+const { tokenizer, parser } = require('./.');
 
-const code = '(add 10 (subst 5 3))';
+const code = '(add 10 (subtract 5 3))';
 
 const tokens = tokenizer(code);
+const oldAst = parser(tokens);
 
 console.log(tokens);
+console.log(JSON.stringify(oldAst));
