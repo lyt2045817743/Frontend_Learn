@@ -74,25 +74,52 @@ const tokenizer = (input) => {
   return tokens;
 }
 
-// 第一步中间产物
-// [
-//   { value: '(', type: 'paren' },
-//   { value: 'add', type: 'name' },
-//   { value: '10', type: 'number' },
-//   { value: '(', type: 'paren' },
-//   { value: 'subtract', type: 'name' },
-//   { value: '5', type: 'number' },
-//   { value: '3', type: 'number' },
-//   { value: ')', type: 'paren' },
-//   { value: ')', type: 'paren' }
-// ]
+//    *    第1步中间产物                             | 第2步中间产物                                                                  |    // 第3步中间产物
+//    *    [                                       | {                                                                            |    {
+//    *      { value: '(', type: 'paren' },        |  "type": "Program",                                                          |      "type": "Program",
+//    *      { value: 'add', type: 'name' },       |   "body": [                                                                  |      "body": [
+//    *      { value: '10', type: 'number' },      |      {                                                                       |       {
+//    *      { value: '(', type: 'paren' },        |         "type": "CallExpression", // CallExpression为表达式, 即括号里面的内容    |         "type": "ExpressionStatement",
+//    *      { value: 'subtract', type: 'name' },  |         "name": "add",                                                       |          "expression": {
+//    *      { value: '5', type: 'number' },       |         "params": [ // 每个数组都代表了同1层的所有节点                            |            "type": "CallExpression",
+//    *      { value: '3', type: 'number' },       |            { // 每个对象表示该层的1个节点                                        |            "callee": {
+//    *      { value: ')', type: 'paren' },        |               "type": "NumberLiteral",                                       |               "type": "Identifier",
+//    *      { value: ')', type: 'paren' }         |               "value": "10"                                                  |               "name": "add"
+//    *    ]                                       |            },                                                                |            },
+//    *                                            |             {                                                                |            "arguments": [
+//    *                                            |                "type": "CallExpression",                                     |               {
+//    *                                            |                "name": "subtract",                                           |                  "type": "NumberLiteral",
+//    *                                            |                "params": [                                                   |                  "value": "10"
+//    *                                            |                   {                                                          |               },
+//    *                                            |                      "type": "NumberLiteral",                                |               {
+//    *                                            |                      "value": "5"                                            |                  "type": "CallExpression",
+//    *                                            |                   },                                                         |                  "callee": {
+//    *                                            |                   {                                                          |                     "type": "Identifier",
+//    *                                            |                      "type": "NumberLiteral",                                |                     "name": "subtract"
+//    *                                            |                      "value": "3"                                            |                  },
+//    *                                            |                   }                                                          |                  "arguments": [
+//    *                                            |                ]                                                             |                     {
+//    *                                            |             }                                                                |                        "type": "NumberLiteral",
+//    *                                            |          ]                                                                   |                        "value": "5"
+//    *                                            |       }                                                                      |                     },
+//    *                                            |    ]                                                                         |                     {
+//    *                                            |  }                                                                           |                        "type": "NumberLiteral",
+//    *                                            |                                                                              |                        "value": "3"
+//    *                                            |                                                                              |                     }
+//    *                                            |                                                                              |                  ]
+//    *                                            |                                                                              |               }
+//    *                                            |                                                                              |            ]
+//    *                                            |                                                                              |         }
+//    *                                            |                                                                              |      }
+//    *                                            |                                                                              |   ]
+//    *                                            |                                                                              | }  
 
 // 编译器实现第二步：语法分析-将词法分析的结果转换为层级关系的表达（树：父子、兄弟）
 // 语法分析需要注意：此时需要关注哪些是关键词、那些该关键词对应的参数（值/变量），因为要处理语义、进行分层了
 const parser = (tokens) => {
   let currentIndex = 0;
   const ast = {
-    type: 'Root',
+    type: 'Program',
     body: [],
   }
 
@@ -100,7 +127,6 @@ const parser = (tokens) => {
     let token = tokens[currentIndex];
     if (token.type === 'number') {
       currentIndex++;
-      console.log(token);
       return {
         type: 'NumberLiteral',
         value: token.value,
@@ -119,7 +145,7 @@ const parser = (tokens) => {
       token = tokens[++currentIndex];
       const node = {
         type: 'CallExpression',
-        value: token.value,
+        name: token.value,
         params: [],
       };
       token = tokens[++currentIndex];
@@ -142,38 +168,88 @@ const parser = (tokens) => {
   return ast;
 }
 
-// 第二步中间产物
-// {
-//   "type": "Root",
-//   "body": [
-//      {
-//         "type": "CallExpression",
-//         "value": "add",
-//         "params": [ // 每个数组都代表了同一层的所有节点
-//            { // 每个对象表示该层的某一个节点
-//               "type": "NumberLiteral",
-//               "value": "10"
-//            },
-//            {
-//               "type": "CallExpression",
-//               "value": "subtract",
-//               "params": [
-//                  {
-//                     "type": "NumberLiteral",
-//                     "value": "5"
-//                  },
-//                  {
-//                     "type": "NumberLiteral",
-//                     "value": "3"
-//                  }
-//               ]
-//            }
-//         ]
-//      }
-//   ]
-// }
+// 编译器实现第三步：代码转换-将改语言的语法分析阶段产生的ast转换成另一种语言的ast的表达
+const traverser = (ast, visiter) => {
+  const traverserArray = (nodes, parent) => {
+    nodes.forEach((node) => {
+      traverserNode(node, parent);
+    })
+  }
+
+  const traverserNode = (node, parent) => {
+    const methods = visiter[node.type];
+    if (methods && methods.enter) {
+      methods.enter(node, parent);
+    }
+
+    switch (node.type) {
+      case 'Program':
+        traverserArray(node.body, node);
+        break;
+      case 'CallExpression':
+        traverserArray(node.params, node);
+        break;
+      case 'NumberLiteral':
+      case 'StringLiteral':
+        break;
+      default:
+        break;
+    }
+  }
+  traverserNode(ast, null);
+}
+
+const transformer = (ast) => {
+  // 所有ast的基本结构都是type + body
+  const newAst = {
+    type: 'Program',
+    body: [],
+  }
+  ast._context = newAst.body;
+  traverser(ast, {
+    NumberLiteral: {
+      enter(node, parent) {
+        parent._context.push({
+          type: 'NumberLiteral',
+          value: node.value
+        })
+      }
+    },
+    StringLiteral: {
+      enter(node, parent) {
+        parent._context.push({
+          type: 'StringLiteral',
+          value: node.value
+        })
+      }
+    },
+    CallExpression: {
+      enter(node, parent) {
+        let newNode = {
+          type: 'CallExpression',
+          callee: {
+            type: 'Identifier',
+            name: node.name
+          },
+          arguments: []
+        }
+        node._context = newNode.arguments;
+
+        if (parent.type !== 'CallExpression') {
+          newNode = {
+            type: 'ExpressionStatement',
+            expression: newNode
+          }
+        }
+        parent._context.push(newNode);
+      }
+    }
+  })
+  return newAst;
+}
 
 module.exports = {
   tokenizer,
   parser,
+  transformer,
 }
