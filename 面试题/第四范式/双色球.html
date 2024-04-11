@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+       .main .balls {
+    width: 450px;
+    padding: 30px 10px 10px;
+    margin-bottom: 20px;
+    position: relative;
+    border-radius: 4px;
+}
+
+.main .balls:after {
+    content: '\20';
+    clear: both;
+    display: block;
+    height: 0;
+    overflow: hidden;
+}
+
+.main .balls span {
+    position: absolute;
+    left: 12px;
+    top: 5px;
+    font-size: 13px;
+}
+
+.main b {
+    float: left;
+    width: 30px;
+    height: 30px;
+    font-size: 15px;
+    background: #FFF;
+    border: 1px solid;
+    border-radius: 50%;
+    line-height: 30px;
+    text-align: center;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+
+.main .red .active {
+    background: #f56c6c;
+    color: #FFF;
+}
+
+.main .blue .active {
+    background: #3a8ee6;
+    color: #FFF;
+}
+
+.main .red {
+    background: #feeff0;
+}
+
+.main .red b {
+    border-color: #f56c6c;
+}
+
+.main .blue {
+    background: #ecf8ff;
+}
+
+.main .blue b {
+    border-color: #3a8ee6;
+}
+    </style>
+</head>
+
+<body>
+    <!-- 填写标签 -->
+    <div class="main">
+    <div class="balls red">
+        <span>红球</span>
+        <div class="balls-wp">
+            <b>01</b>
+            <b>02</b>
+            <b>03</b>
+            <b>04</b>
+            <b>05</b>
+            <b>06</b>
+            <b>07</b>
+            <b>08</b>
+            <b>09</b>
+            <b>10</b>
+            <b>11</b>
+            <b>12</b>
+            <b>13</b>
+            <b>14</b>
+            <b>15</b>
+            <b>16</b>
+            <b>17</b>
+            <b>18</b>
+            <b>19</b>
+            <b>20</b>
+            <b>21</b>
+            <b>22</b>
+            <b>23</b>
+            <b>24</b>
+            <b>25</b>
+            <b>26</b>
+            <b>27</b>
+            <b>28</b>
+            <b>29</b>
+            <b>30</b>
+            <b>31</b>
+            <b>32</b>
+            <b>33</b>
+        </div>
+    </div>
+    <div class="balls blue">
+        <span>蓝球</span>
+        <div class="balls-wp">
+            <b>01</b>
+            <b>02</b>
+            <b>03</b>
+            <b>04</b>
+            <b>05</b>
+            <b>06</b>
+            <b>07</b>
+            <b>08</b>
+            <b>09</b>
+            <b>10</b>
+            <b>11</b>
+            <b>12</b>
+            <b>13</b>
+            <b>14</b>
+            <b>15</b>
+            <b>16</b>
+        </div>
+    </div>
+</div>
+    <script type="text/javascript">
+        // 填写JavaScript
+        randomFn();
+
+        function randomFn() {
+            const redParent = document.getElementsByClassName('balls red')[0].children[1];
+            const redNums = redParent.children;
+
+            const blueParent = document.getElementsByClassName('balls blue')[0].children[1];
+            const blueNums = blueParent.children;
+
+            // 处理红球
+            // 生成6个随机数
+            const randoms = new Set();
+            for (let i = 0; i < 6; i++) {
+                const random = Math.floor(Math.random(0, 1) * 33) + 1;
+                if (randoms.has(random)) {
+                    i--;
+                } else {
+                    randoms.add(random);
+                }
+            }
+            // 对随机数进行倒序排序
+            const sort = [...randoms].sort((a, b) => b - a);
+
+            // 处理node节点
+            const sortNode = sort.map(item => redNums[item - 1]);
+            sortNode.forEach((item) => {
+                item.classList.add('active');
+                redParent.insertBefore(item, redParent.firstChild);
+            })
+
+            // 处理篮球
+            const random = Math.floor(Math.random(0, 1) * 16) + 1;
+            const curNode = blueNums[random - 1];
+            curNode.classList.add('active');
+            blueParent.insertBefore(curNode, blueParent.firstChild);
+
+            // 输出结果
+            const result = sort.map(item => String(item).padStart(2, 0)).reverse().join(',') + '|' + String(random).padStart(2, 0);
+            console.log(result);
+            return result;
+        }
+    </script>
+</body>
+
+</html>

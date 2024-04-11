@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+</head>
+
+<body>
+  <ul id="myList">
+    <li id="item1">项目 1</li>
+    <li id="item3">项目 3</li>
+    <li id="item2">项目 2</li>
+    <li id="item4">项目 4</li>
+  </ul>
+
+  <script>
+    function sortAndReturnTextContent() {
+        const list = document.getElementById('myList');
+
+        // 在此补全代码
+        const itemsArr = Array.from(list.children);
+        const map = {};
+        for (let i = 0; i < itemsArr.length; i++) {
+            let item = itemsArr[i];
+            const [name, id] = item.innerText.split(' ');
+            map[id] = item;
+        }
+        const keys = Object.keys(map).sort();
+      
+       // 清空无序列表
+        while (list.firstChild) {
+            list.removeChild(list.firstChild);
+        }
+        
+        // 将排序后的列表项重新添加到无序列表中
+        keys.forEach(function(key) {
+            list.appendChild(map[key]);
+        });
+    }
+    sortAndReturnTextContent()
+  </script>
+
+
+
+</body>
+
+</html>
